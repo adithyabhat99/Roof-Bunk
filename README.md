@@ -15,7 +15,7 @@ npm install
 
 
 ### To run the server in developer mode(whenever code is changed, server will be automatially start)
-``` npm dev run ``
+``` npm dev run ```
 
 ### To run the server in production.
 ``` node app.js ```
