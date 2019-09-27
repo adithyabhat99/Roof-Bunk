@@ -20,4 +20,4 @@ npm install
 ### To run the server in production.
 ``` node app.js ```
 
-### To test the server use Postman
+### To test the server use POSTMAN or CURL
