@@ -8,11 +8,13 @@ BEGIN
     UID varchar(30) primary key,
     Name varchar(20) NOT NULL,
     Contact_number int(10) NOT NULL UNIQUE KEY,
+    Email varchar(50) NOT NULL UNIQUE KEY,
     Password varchar(255) NOT NULL,
     Photo varchar(255),
     Gender char(1) NOT NULL,
     DOB date NOT NULL,
     OTP int(4) NOT NULL,
+    EVerified tinyint(1) default 0, #value is 1 if email is verified 
     Verified tinyint(1) default 0 #value 1 is se if phone is verified
     );
 

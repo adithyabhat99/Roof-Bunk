@@ -1,0 +1,11 @@
+{
+    "host":"smtp.gmail.com",
+    "auth":{
+        "type":"OAuth2",
+        "user":"roofandbunk@gmail.com",
+        "clientId":"280210537153-sja406gb1uko3qj2khsftkkl8uhst0m8.apps.googleusercontent.com",
+        "clientSecret":"3ImU96KPW3jHoVJmSr9380qj",
+        "refreshToken":"1/UQohLXQzHn-FNbtn9--zBCpA81Q67adzp1Q0RDW4NbI",
+        "accessToken":"ya29.Il-QBw3txZEjWsw4EhYwf7VDQzW33hvML3MHTWmh2rP1nQaR_IeM7liCYnBKGapRf_I0_wzvhjS9FzfSGg13fb6L1jVH3svBfN0NwCOnK1oRHeA2rn9Hh8t-qTnaSMCyVQ"
+    }
+}
