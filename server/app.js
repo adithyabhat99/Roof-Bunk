@@ -1,7 +1,5 @@
 // import all the npm packages which will be used.
 const express=require("express")
-const uuid=require("uuid/v4");
-const bcrypt = require("bcrypt");
 
 
 const db=require("./database/database");
@@ -23,7 +21,8 @@ app.use(express.json());
 // All the routes here.
 // Pass all the parameters that are required for routes
 require('./routes/hello')(app);
-require('./routes/Student/account')(app,db,uuid,bcrypt,email,sms);
+require('./routes/Student/account')(app,db,email,sms);
+require('./routes/Student/auth')(app,db,email,sms);
 
 // Start the server. Along with that call the stored procedure to create tables.
 app.listen(port,"0.0.0.0",()=>{

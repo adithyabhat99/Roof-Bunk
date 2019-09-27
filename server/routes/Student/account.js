@@ -1,4 +1,11 @@
-module.exports=(app,db,uuid,bcrypt,email,sms)=>{
+// This file contains routes to Create,Delete,Retrieve,Update student account.
+module.exports=(app,db,email,sms)=>{
+    const uuid=require("uuid/v4");
+    const bcrypt = require("bcrypt");
+
+    // Route create a student account.(POST Method)
+    // It returns UID of the student after successful creation of account.
+    // Later the student needs to verify email/phone number to successfully log in.
     app.post("/api/student/account",(req,res)=>{
         if(!req.body.name)
         {
@@ -56,10 +63,12 @@ module.exports=(app,db,uuid,bcrypt,email,sms)=>{
             }
             if(number!=uid)
             {
+                // Commented below because an SMS costs $0.04, only $14 is free, use this only when required.
                 //sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`)
             }
             res.statusCode=200;
             res.json({"message":"success","uid":uid.toString()});
         });
     });
+
 }
