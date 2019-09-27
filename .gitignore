@@ -98,3 +98,7 @@ public
 .dynamodb/
 
 mysql_config.json
+
+twilio_config.json
+
+email_config.json
