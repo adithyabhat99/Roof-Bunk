@@ -2,18 +2,19 @@ delimiter |
 
 create PROCEDURE createTables()
 BEGIN
-    #creating student login table
+    #creating student table
     create table if not exists Student
     (
-    UID varchar(30) primary key,
+    UID varchar(128) primary key,
     Name varchar(20) NOT NULL,
-    Contact_number int(10) NOT NULL UNIQUE KEY,
-    Email varchar(50) NOT NULL UNIQUE KEY,
+    Contact_number varchar(128) NOT NULL UNIQUE KEY,
+    Email varchar(128) NOT NULL UNIQUE KEY,
     Password varchar(255) NOT NULL,
     Photo varchar(255),
     Gender char(1) NOT NULL,
     DOB date NOT NULL,
     OTP int(4) NOT NULL,
+    EOTP int(4) NOT NULL,
     EVerified tinyint(1) default 0, #value is 1 if email is verified 
     Verified tinyint(1) default 0 #value 1 is se if phone is verified
     );
@@ -21,11 +22,13 @@ BEGIN
     #creating table for the PG owner
     create table if not exists Owner
     (
-        PGID varchar(30) primary key,
+        PGID varchar(128) primary key,
         Pg_name varchar(30) NOT NULL,
         Owner_name varchar(30) NOT NULL,
-        Contact int(10) NOT NULL UNIQUE KEY,
-        Email varchar(50) NOT NULL UNIQUE KEY,
+        Contact varchar(128) NOT NULL UNIQUE KEY,
+        Email varchar(128) NOT NULL UNIQUE KEY,
+        OTP int(4) NOT NULL,
+        EOTP int(4) NOT NULL,
         Description text,
         Verified tinyint(1) default 0, #value is 1 if phone is verified
         EVerified tinyint(1) default 0, #value is 1 if email is verified 
@@ -43,16 +46,16 @@ BEGIN
     create table if not exists Student_Critical_Info
     (
         Home_address varchar(255) NOT NULL,
-        Emergency_contact int(10) NOT NULL UNIQUE KEY,
+        Emergency_contact varchar(128) NOT NULL UNIQUE KEY,
         Education varchar(255), #description of education details of the student
-        UID varchar(30),
+        UID varchar(128),
         foreign key(UID) references Student(UID) on delete cascade
     );
 
     #table containing the description of the rooms(There can be different types of rooms in a PG)
     create table if not exists Room
     (
-        PGID varchar(30),
+        PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
         Empty int(3), #gives total number of beds vacant
         Type int(1), #Enter 1 for single sharing,2 for two sharing and so on
@@ -62,7 +65,7 @@ BEGIN
 
     create table if not exists PG_Pictures 
     (
-        PGID varchar(30),
+        PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
         filename varchar(128) not null
     );
@@ -77,9 +80,9 @@ BEGIN
     (
         Joined date NOT NULL,
         Expiry date NOT NULL, #date when the student is expected to leave
-        PGID varchar(30),
+        PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
-        UID varchar(30),
+        UID varchar(128),
         foreign key(UID) references Student(UID) on delete cascade,
         Type int(1),
         CONSTRAINT IDR_TYPE foreign key(PGID,Type) references Room(PGID,Type) on delete cascade
@@ -88,9 +91,9 @@ BEGIN
     #intermediate table containing the request orders to join the PG
     create table if not exists Request_Roof
     (
-        UID varchar(30),
+        UID varchar(128),
         foreign key(UID) references Student(UID) on delete cascade,
-        PGID varchar(30),
+        PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
         Type int(1), #Enter 1 for single sharing,2 for two sharing and so on
         CONSTRAINT IDRO_TYPE foreign key(PGID,Type) references Room(PGID,Type) on delete cascade
