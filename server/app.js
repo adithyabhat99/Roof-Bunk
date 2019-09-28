@@ -1,6 +1,6 @@
 // import all the npm packages which will be used.
 const express=require("express")
-
+const jwt=require("jsonwebtoken");
 
 const db=require("./database/database");
 const sms=require("./sms/sms");
@@ -18,6 +18,36 @@ app.use((req,res,next)=>{
 // Middleware to accept post requests.
 app.use(express.json());
 
+// Middleware to verify auth tokens.
+// Use this middleware in all the routes except login,create account,verify email/number.
+function verify_token(req,res,next){
+    const config=require("./auth_config");
+    let token=req.headers["x-access-token"]||req.headers["authorization"];
+    if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length);
+    }
+    if (token) {
+        jwt.verify(token, config.secret, (err, decoded) => {
+          if (err) {
+            res.statusCode=401;
+            return res.json({
+              "error": "Token is not valid"
+            });
+          } 
+          else {
+            req.decoded = decoded;
+            next();
+          }
+        });
+      } else {
+        res.statusCode=400;
+        return res.json({
+          "error": "Auth token is not supplied"
+        });
+      }
+}
+
 // All the routes here.
 // Pass all the parameters that are required for routes
 require("./routes/hello")(app);
@@ -25,6 +55,8 @@ require("./routes/Student/account")(app,db,email,sms);
 require("./routes/Student/auth")(app,db,email,sms);
 require("./routes/PG/account")(app,db,email,sms);
 require("./routes/PG/auth")(app,db,email,sms);
+// The routes below require verify_token as middleware.
+
 
 // Start the server. Along with that call the stored procedure to create tables.
 app.listen(port,"0.0.0.0",()=>{
