@@ -20,9 +20,11 @@ app.use(express.json());
 
 // All the routes here.
 // Pass all the parameters that are required for routes
-require('./routes/hello')(app);
-require('./routes/Student/account')(app,db,email,sms);
-require('./routes/Student/auth')(app,db,email,sms);
+require("./routes/hello")(app);
+require("./routes/Student/account")(app,db,email,sms);
+require("./routes/Student/auth")(app,db,email,sms);
+require("./routes/PG/account")(app,db,email,sms);
+require("./routes/PG/auth")(app,db,email,sms);
 
 // Start the server. Along with that call the stored procedure to create tables.
 app.listen(port,"0.0.0.0",()=>{

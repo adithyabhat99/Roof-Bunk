@@ -27,6 +27,7 @@ BEGIN
         Owner_name varchar(30) NOT NULL,
         Contact varchar(128) NOT NULL UNIQUE KEY,
         Email varchar(128) NOT NULL UNIQUE KEY,
+        Password varchar(255) NOT NULL,
         OTP int(4) NOT NULL,
         EOTP int(4) NOT NULL,
         Description text,

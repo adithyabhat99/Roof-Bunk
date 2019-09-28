@@ -6,7 +6,7 @@ module.exports=(app,db,email,sms)=>{
     const jwt=require("jsonwebtoken");
     const bcrypt=require("bcrypt");
 
-    app.post("/api/student/login",(req,res)=>{
+    app.post("/api/pg/login",(req,res)=>{
         const username=req.body.username;
         const passw=req.body.password;
         if(!username || !passw)
@@ -15,8 +15,8 @@ module.exports=(app,db,email,sms)=>{
             res.json({"error":"send username(email/phoneno) and password"});
             return;
         }
-        query1=`select count(*) from Student where (Email='${username}' and EVerified=1) or (Contact_number='${username}' and Verified=1)`;
-        query2=`select UID,Password from Student where Email='${username}' or Contact_number='${username}'`;
+        query1=`select count(*) from Owner where (Email='${username}' and EVerified=1) or (Contact='${username}' and Verified=1)`;
+        query2=`select PGID,Password from Owner where Email='${username}' or Contact='${username}'`;
         db.query(query1,(error,result)=>{
             if(error)
             {
@@ -48,7 +48,7 @@ module.exports=(app,db,email,sms)=>{
                     const token=jwt.sign({
                         exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                         uid:UID,
-                        type:"student"
+                        type:"pg"
                     },auth_config["secret"]);
                     res.statusCode=200;
                     res.json({"message":"success","token":token});
@@ -58,11 +58,11 @@ module.exports=(app,db,email,sms)=>{
     });
 
     // Route to verify email.
-    app.post("/api/student/verify/email",(req,res)=>{
+    app.post("/api/pg/verify/email",(req,res)=>{
         const otp=req.body.otp;
         const mail=req.body.email;
-        query1=`update Student set EVerified=1 where Email='${mail}' and EOTP='${otp}'`;
-        query2=`select UID from Student where Email='${mail}'`;
+        query1=`update Owner set EVerified=1 where Email='${mail}' and EOTP='${otp}'`;
+        query2=`select PGID from Owner where Email='${mail}'`;
         db.query(query1,(error,result)=>{
             if(error)
             {
@@ -77,25 +77,25 @@ module.exports=(app,db,email,sms)=>{
                     res.json({"error":"could not verify"});
                     return;
                 }
-                const UID=result[0]["UID"];
+                const UID=result[0]["PGID"];
                 const token=jwt.sign({
                     exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                     uid:UID,
-                    type:"student"
+                    type:"pg"
                 },auth_config["secret"]);
                 res.statusCode=200;
                 res.json({"message":"success","token":token});
-            })
+            });
         });
         email(mail,"Email Verified","Your email verification is successful");
     });
 
     // Route to verify phone number.
-    app.post("/api/student/verify/number",(req,res)=>{
+    app.post("/api/pg/verify/number",(req,res)=>{
         const otp=req.body.otp;
         const number=req.body.number;
-        query1=`update Student set Verified=1 where Contact_number='${number}' and OTP='${otp}'`;
-        query2=`select UID from Student where Contact_number='${number}'`;
+        query1=`update Owner set Verified=1 where Contact='${number}' and OTP='${otp}'`;
+        query2=`select PGID from Owner where Contact='${number}'`;
         db.query(query1,(error,result)=>{
             if(error)
             {
@@ -103,7 +103,7 @@ module.exports=(app,db,email,sms)=>{
                 res.json({"error":"could not verify"});
                 return;
             }
-            db.query(query2,(error,result)=>{
+            db(query2,(error,result)=>{
                 if(error)
                 {
                     res.statusCode=401;
@@ -114,7 +114,7 @@ module.exports=(app,db,email,sms)=>{
                 const token=jwt.sign({
                     exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                     uid:UID,
-                    type:"student"
+                    type:"pg"
                 },auth_config["secret"]);
                 res.statusCode=200;
                 res.json({"message":"success","token":token});
