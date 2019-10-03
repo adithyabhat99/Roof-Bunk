@@ -23,24 +23,30 @@ app.use(express.json());
 function verify_token(req,res,next){
     const config=require("./auth_config");
     let token=req.headers["x-access-token"]||req.headers["authorization"];
-    if (token.startsWith('Bearer ')) {
+    if (token.startsWith('Bearer ')) 
+    {
         // Remove Bearer from string
         token = token.slice(7, token.length);
     }
-    if (token) {
+    if (token) 
+    {
         jwt.verify(token, config.secret, (err, decoded) => {
-          if (err) {
+          if (err) 
+          {
             res.statusCode=401;
             return res.json({
               "error": "Token is not valid"
             });
           } 
-          else {
+          else 
+          {
             req.decoded = decoded;
             next();
           }
         });
-      } else {
+      } 
+      else 
+      {
         res.statusCode=400;
         return res.json({
           "error": "Auth token is not supplied"

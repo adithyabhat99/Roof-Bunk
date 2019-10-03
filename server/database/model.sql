@@ -33,6 +33,8 @@ BEGIN
         Description text,
         Verified tinyint(1) default 0, #value is 1 if phone is verified
         EVerified tinyint(1) default 0, #value is 1 if email is verified 
+        lat FLOAT(10,6) not null,
+        lng FLOAT(10,6) not null,
         Gender char(1) NOT NULL,
         Bathroom tinyint(1) default 1,#Enter 1 for attatched bathroom facilities else 0
         Wifi tinyint(1) default 0,#Enter 1 for Wifi facilities else 0

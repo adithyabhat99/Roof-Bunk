@@ -64,11 +64,14 @@ module.exports=(app,db,email,sms)=>{
             if(number!=uid)
             {
                 // Commented below because an SMS costs $0.04, only $14 is free, use this only when required.
-                //sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`)
+                // sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`)
             }
             res.statusCode=200;
             res.json({"message":"success","uid":uid.toString(),"type":"student"});
         });
     });
 
+    app.post("/api/student/resetpassword",(req,res)=>{
+
+    });
 }

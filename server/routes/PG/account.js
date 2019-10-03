@@ -31,6 +31,12 @@ module.exports=(app,db,email,sms)=>{
             res.json({"error":"gender is required"});
             return;
         }
+        if(!req.body.lat || req.body.lng)
+        {
+            res.statusCode=400;
+            res.json({"error":"latitude and longitude required"});
+            return;
+        }
         const uid=uuid().toString();
         const pgname=req.body.pgname;
         const ownername=req.body.ownername;
@@ -42,8 +48,10 @@ module.exports=(app,db,email,sms)=>{
         // OTPs will be changed when user updates email/phone
         const OTP=(Math.floor(Math.random()*9000+1000)).toString();
         const EOTP=(Math.floor(Math.random()*9000+1000)).toString();
-        query=`insert into Owner(PGID,Pg_name,Owner_name,Contact,Email,Password,Gender,OTP,EOTP) 
-        values('${uid}','${pgname}','${ownername}','${number}','${mail}','${password}','${gender}','${OTP}','${EOTP}')`;
+        const lat=req.body.lat;
+        const lng=req.body.lng;
+        query=`insert into Owner(PGID,Pg_name,Owner_name,Contact,Email,Password,Gender,OTP,EOTP,lat,lng) 
+        values('${uid}','${pgname}','${ownername}','${number}','${mail}','${password}','${gender}','${OTP}','${EOTP}','${lat}','${lng}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
