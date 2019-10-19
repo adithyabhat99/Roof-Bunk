@@ -1,7 +1,7 @@
 // This file contains routes to login,verify email,phone of the student
 // Login is possible only if account is verified(email or phone).
 
-module.exports=(app,db,email,sms)=>{
+module.exports=(app,db,email,sms,auth)=>{
     const auth_config=require("../../auth_config");
     const jwt=require("jsonwebtoken");
     const bcrypt=require("bcrypt");
@@ -56,7 +56,6 @@ module.exports=(app,db,email,sms)=>{
             });
         });
     });
-
     // Route to verify email.
     app.post("/api/pg/verify/email",(req,res)=>{
         const otp=req.body.otp;

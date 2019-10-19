@@ -1,0 +1,55 @@
+pgs..
+{
+    "ownername":"adithya",
+	"pgname":"pg1",
+	"email":"adithyabhat99@gmail.com",
+	"password":"123",
+	"gender":"M",
+	"lat":"12.295810",
+	"lng":"76.639381"
+}
+adithyabhatoct
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjY3OTMsInVpZCI6IjYxODJjOTRhLTUyMmMtNGY0OC05OTM5LWIzNGNjODY3NzY3MSIsInR5cGUiOiJwZyIsImlhdCI6MTU3MTUxNzk5M30.8xof4NlcghuHV82lOCCl2ZP34bJfdqt98lSAWy-gSBI"
+}
+
+oct99
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjY4NTAsInVpZCI6IjYxNzlmZDMxLTgyZWUtNGVmZS1iZWNiLWMxZjhhZGZhMjQxMCIsInR5cGUiOiJwZyIsImlhdCI6MTU3MTUxODA1MH0.9Mhy-xpN6rRFIMVQK-Oc58oLWizGOPtbGi7OOHFAEEY"
+}
+
+99
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjY4OTEsInVpZCI6IjA5YTcxNDExLTM0ZDQtNGRkNC04MGU3LTg0ZTgzNGY4YmQ3YSIsInR5cGUiOiJwZyIsImlhdCI6MTU3MTUxODA5MX0.3Duv3y3CaPoAcmsS4KdL8X18ggemJrfomiqC2h9tAIw"
+}
+home
+{
+	"lat":"12.295810",
+	"lan":"76.639381"
+}
+students..
+{
+	"name":"adithya",
+	"email":"adithyabhatoct99@gmail.com",
+	"gender":"M",
+	"password":"123",
+	"dob":"1999-10-14"
+}
+oct99
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjc3ODksInVpZCI6Ijc0YTcwMzVlLWJlMjgtNDAxYS05YTdiLTMyNjQyNmJhMjE1MiIsInR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNTcxNTE4OTg5fQ.VTdyotmPr8u0y8_NEKKjrOn3cwc6qgxI3Y93GRTrcb4"
+}
+oct
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjc2MzQsInVpZCI6IjAyMDI5ZjZlLWE0MjItNDUwYy1iZDVhLTNkMjE1ZjVlM2NiMyIsInR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNTcxNTE4ODM0fQ.lgs9SpkBrTIt8qU6zIZMdAlseNvN2w6x88lRFOvzLso"
+}
+99
+{
+    "message": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTAyNjc2NzgsInVpZCI6IjQ0MTYyMTgxLTJmZjMtNGVmMy04M2M3LWMyMzEwOTkxZDY4YyIsInR5cGUiOiJzdHVkZW50IiwiaWF0IjoxNTcxNTE4ODc4fQ.KTm3iuFTEbroj4OALjRSvF9SnJlzoheSTPwisSQcc50"
+}

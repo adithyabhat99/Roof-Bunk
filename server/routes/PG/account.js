@@ -1,5 +1,5 @@
 // This file contains routes to Create,Delete,Retrieve,Update PG account.
-module.exports=(app,db,email,sms)=>{
+module.exports=(app,db,email,sms,auth)=>{
     const uuid=require("uuid/v4");
     const bcrypt = require("bcrypt");
 
@@ -31,7 +31,7 @@ module.exports=(app,db,email,sms)=>{
             res.json({"error":"gender is required"});
             return;
         }
-        if(!req.body.lat || req.body.lng)
+        if(!req.body.lat || !req.body.lng)
         {
             res.statusCode=400;
             res.json({"error":"latitude and longitude required"});
@@ -70,6 +70,21 @@ module.exports=(app,db,email,sms)=>{
             }
             res.statusCode=200;
             res.json({"message":"success","uid":uid.toString(),"type":"PG"});
+        });
+    });
+    // Not tested.
+    app.delete("/api/pg/account",auth,(req,res)=>{
+        pgid=req.decoded["pgid"];
+        query=`delete from Owner where PGID=${pgid}`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=401;
+                res.json({"error":"could not delete account"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"success":"account deleted"});
         });
     });
 }

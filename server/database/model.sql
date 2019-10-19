@@ -10,7 +10,7 @@ BEGIN
     Contact_number varchar(128) NOT NULL UNIQUE KEY,
     Email varchar(128) NOT NULL UNIQUE KEY,
     Password varchar(255) NOT NULL,
-    Photo varchar(255),
+    Photo blob,
     Gender char(1) NOT NULL,
     DOB date NOT NULL,
     OTP int(4) NOT NULL,
@@ -70,7 +70,7 @@ BEGIN
     (
         PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
-        filename varchar(128) not null
+        photo blob not null
     );
 
     #NOTE!!
@@ -100,6 +100,17 @@ BEGIN
         foreign key(PGID) references Owner(PGID) on delete cascade,
         Type int(1), #Enter 1 for single sharing,2 for two sharing and so on
         CONSTRAINT IDRO_TYPE foreign key(PGID,Type) references Room(PGID,Type) on delete cascade
+    );
+    create table if not exists reviews 
+    ( 
+        UID varchar(128), 
+        foreign key(UID) references Student(UID) on delete cascade, 
+        PGID varchar(128), 
+        foreign key(PGID) references Owner(PGID) on delete cascade, 
+        review text not null, 
+        rating int not null, 
+        rdate datetime not null,
+        CONSTRAINT rid primary key(UID,PGID) 
     );
 END |
 

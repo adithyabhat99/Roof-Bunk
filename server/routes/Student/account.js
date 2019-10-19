@@ -1,5 +1,5 @@
 // This file contains routes to Create,Delete,Retrieve,Update student account.
-module.exports=(app,db,email,sms)=>{
+module.exports=(app,db,email,sms,auth)=>{
     const uuid=require("uuid/v4");
     const bcrypt = require("bcrypt");
 
@@ -70,8 +70,19 @@ module.exports=(app,db,email,sms)=>{
             res.json({"message":"success","uid":uid.toString(),"type":"student"});
         });
     });
-
-    app.post("/api/student/resetpassword",(req,res)=>{
-
+    // Not tested.
+    app.delete("/api/student/account",auth,(req,res)=>{
+        uid=req.decoded["uid"];
+        query=`delete from Student where UID=${uid}`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=401;
+                res.json({"error":"could not delete account"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"success":"account deleted"});
+        });
     });
 }

@@ -21,4 +21,3 @@ npm install
 ``` node app.js ```
 
 ### To test the server use POSTMAN or CURL
-hellooooooo

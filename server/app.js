@@ -1,7 +1,7 @@
 // import all the npm packages which will be used.
 const express=require("express")
 const jwt=require("jsonwebtoken");
-
+const datetime=require("node-datetime");
 const db=require("./database/database");
 const sms=require("./sms/sms");
 const email=require("./email/email");
@@ -20,7 +20,7 @@ app.use(express.json());
 
 // Middleware to verify auth tokens.
 // Use this middleware in all the routes except login,create account,verify email/number.
-function verify_token(req,res,next){
+function auth(req,res,next){
     const config=require("./auth_config");
     let token=req.headers["x-access-token"]||req.headers["authorization"];
     if (token.startsWith('Bearer ')) 
@@ -57,10 +57,13 @@ function verify_token(req,res,next){
 // All the routes here.
 // Pass all the parameters that are required for routes
 require("./routes/hello")(app);
-require("./routes/Student/account")(app,db,email,sms);
-require("./routes/Student/auth")(app,db,email,sms);
-require("./routes/PG/account")(app,db,email,sms);
+require("./routes/Student/account")(app,db,email,sms,auth);
+require("./routes/Student/auth")(app,db,email,sms,auth);
+require("./routes/Student/review")(app,db,email,sms,auth,datetime);
+require("./routes/PG/account")(app,db,email,sms,auth);
 require("./routes/PG/auth")(app,db,email,sms);
+require("./routes/PG/reviews")(app,db,email,sms,auth);
+require("./routes/Services/home")(app,db,auth);
 // The routes below require verify_token as middleware.
 
 
