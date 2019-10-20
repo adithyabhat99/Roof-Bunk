@@ -12,9 +12,9 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
         }
         let d=datetime.create();
         let now=d.format('Y-m-d H:M:S');
-        query=`insert into reviews values('${uid}','${pgid}','${review}','${rating}','${now}')`;
+        let query=`insert into reviews values('${uid}','${pgid}','${review}','${rating}','${now}')`;
         db.query(query,(error,result)=>{
-        if(error)
+            if(error)
             {
                 res.statusCode=400;
                 res.json({"error":"error occured"});
@@ -22,6 +22,15 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             }
             res.statusCode=200;
             res.json({"message":"success"});
+        });
+        let query2=`select Email,Contact from Owner where PGID='${pgid}'`;
+            db.query(query2,(e,r)=>{
+                if(e)
+                {
+                    return;
+                }
+                let email_id=r[0]["Email"];
+                email(email_id,"Review","Hey,there is a new review to your pg");
         });
     });
     app.put("/api/student/review",auth,(req,res)=>{
@@ -37,9 +46,9 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
         }
         let d=datetime.create();
         let now=d.format('Y-m-d H:M:S');
-        query=`update reviews set review='${review}',rating='${rating}',rdate='${now}' where UID='${uid}' and PGID='${pgid}'`;
+        let query=`update reviews set review='${review}',rating='${rating}',rdate='${now}' where UID='${uid}' and PGID='${pgid}'`;
         db.query(query,(error,result)=>{
-        if(error)
+            if(error)
             {
                 res.statusCode=400;
                 res.json({"error":"error occured"});
@@ -61,13 +70,13 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
         query=`delete from reviews where UID='${uid}' and PGID='${pgid}'`;
         db.query(query,(error,result)=>{
             if(error)
-                {
-                    res.statusCode=400;
-                    res.json({"error":"error occured"});
-                    return;
-                }
-                res.statusCode=200;
-                res.json({"message":"success"});
+            {
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"message":"success"});
         }); 
     });
 }

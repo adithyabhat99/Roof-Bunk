@@ -20,6 +20,7 @@ app.use(express.json());
 
 // Middleware to verify auth tokens.
 // Use this middleware in all the routes except login,create account,verify email/number.
+// This is for student account only
 function auth(req,res,next){
     const config=require("./auth_config");
     let token=req.headers["x-access-token"]||req.headers["authorization"];
@@ -41,6 +42,13 @@ function auth(req,res,next){
           else 
           {
             req.decoded = decoded;
+            if(decoded["type"]!="student")
+            {
+              res.statusCode=401;
+              return res.json({
+                "error": "Token is not valid,user is not a student"
+              });
+            }
             next();
           }
         });
@@ -53,6 +61,47 @@ function auth(req,res,next){
         });
       }
 }
+// Same middleware for pg owner with just a single difference to verify user is a pg owner
+function auth_pg(req,res,next){
+  const config=require("./auth_config");
+  let token=req.headers["x-access-token"]||req.headers["authorization"];
+  if (token.startsWith('Bearer ')) 
+  {
+      // Remove Bearer from string
+      token = token.slice(7, token.length);
+  }
+  if (token) 
+  {
+      jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) 
+        {
+          res.statusCode=401;
+          return res.json({
+            "error": "Token is not valid"
+          });
+        } 
+        else 
+        {
+          req.decoded = decoded;
+          if(decoded["type"]!="pg")
+          {
+            res.statusCode=401;
+            return res.json({
+              "error": "Token is not valid,user is not a pg owner"
+            });
+          }
+          next();
+        }
+      });
+    } 
+    else 
+    {
+      res.statusCode=400;
+      return res.json({
+        "error": "Auth token is not supplied"
+      });
+    }
+}
 
 // All the routes here.
 // Pass all the parameters that are required for routes
@@ -60,10 +109,16 @@ require("./routes/hello")(app);
 require("./routes/Student/account")(app,db,email,sms,auth);
 require("./routes/Student/auth")(app,db,email,sms,auth);
 require("./routes/Student/review")(app,db,email,sms,auth,datetime);
-require("./routes/PG/account")(app,db,email,sms,auth);
-require("./routes/PG/auth")(app,db,email,sms);
-require("./routes/PG/reviews")(app,db,email,sms,auth);
+require("./routes/Student/bookmark")(app,db,email,sms,auth,datetime);
+require("./routes/Student/notifications")(app,db,email,sms,auth);
+require("./routes/Student/message")(app,db,email,sms,auth,datetime);
 require("./routes/Services/home")(app,db,auth);
+require("./routes/Services/pg_details")(app,db,auth);
+require("./routes/PG/account")(app,db,email,sms,auth_pg);
+require("./routes/PG/auth")(app,db,email,sms);
+require("./routes/PG/reviews")(app,db,email,sms,auth_pg);
+require("./routes/PG/notifications")(app,db,email,sms,auth_pg);
+require("./routes/PG/message")(app,db,email,sms,auth_pg,datetime);
 // The routes below require verify_token as middleware.
 
 

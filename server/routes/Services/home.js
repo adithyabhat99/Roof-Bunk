@@ -1,23 +1,16 @@
 module.exports=(app,db,auth)=>{
     app.get("/api/home",auth,(req,res)=>{
         let lat=req.body.lat;
-        let lan=req.body.lan;
+        let lng=req.body.lng;
         let dis=(req.body.dis!=null)?req.body.dis:10;
         let num=(req.body.num!=null)?req.body.num*10:0;
-        if(lat==null || lan==null)
+        if(lat==null || lng==null)
         {
             res.statusCode=400;
             res.json({"error":"lat and lan required"});
             return;
         }
-        //send proper data when building front end.
-        query=`select Pg_name,(6371*acos (
-            cos ( radians(${lat}) )
-            * cos( radians( lat ) )
-            * cos( radians( lng ) - radians(${lan}) )
-            + sin ( radians(${lat}) )
-            * sin( radians( lat ) ))) as distance
-            from Owner having distance<${dis} order by distance limit ${num},10`;
+        query=`call fetch_pgs(${lat},${lng},${num},${dis})`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -25,7 +18,7 @@ module.exports=(app,db,auth)=>{
                 res.json({"error":"error eccured"});
             }
             res.statusCode=200;
-            res.json(result); 
+            res.json(result[0]); 
         });
     });
 }

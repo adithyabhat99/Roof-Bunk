@@ -10,7 +10,7 @@ BEGIN
     Contact_number varchar(128) NOT NULL UNIQUE KEY,
     Email varchar(128) NOT NULL UNIQUE KEY,
     Password varchar(255) NOT NULL,
-    Photo blob,
+    Photo varchar(128),
     Gender char(1) NOT NULL,
     DOB date NOT NULL,
     OTP int(4) NOT NULL,
@@ -70,7 +70,7 @@ BEGIN
     (
         PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
-        photo blob not null
+        photo varchar(128) not null
     );
 
     #NOTE!!
@@ -111,6 +111,40 @@ BEGIN
         rating int not null, 
         rdate datetime not null,
         CONSTRAINT rid primary key(UID,PGID) 
+    );
+    create table if not exists bookmarks 
+    (
+        UID varchar(128),  
+        foreign key(UID) references Student(UID) on delete cascade, 
+        PGID varchar(128),  
+        foreign key(PGID) references Owner(PGID) on delete cascade, 
+        bdate datetime not null, 
+        constraint bookmark_con primary key(UID,PGID) 
+    );
+    create table if not exists pg_notifications 
+    ( 
+        PGID varchar(128),  
+        foreign key(PGID) references Owner(PGID) on delete cascade,  
+        ndate datetime not null, 
+        type varchar(10) not null,
+        message text not null
+    );
+    create table if not exists student_notifications 
+    ( 
+        UID varchar(128),  
+        foreign key(UID) references Student(UID) on delete cascade,  
+        ndate datetime not null, 
+        type varchar(10) not null,
+        message text not null
+    );
+    create table if not exists messages 
+    ( 
+        id int primary key auto_increment,
+        sender_type char(1) not null, # 'P' for pg and 'S' for student
+        sender_id varchar(128) not null, 
+        reciever_id varchar(128) not null, 
+        message varchar(255) not null,
+        mdate datetime not null 
     );
 END |
 
