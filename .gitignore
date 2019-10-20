@@ -104,3 +104,5 @@ twilio_config.json
 email_config.json
 
 auth_config.json
+
+*.jpg

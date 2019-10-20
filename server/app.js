@@ -1,11 +1,14 @@
 // import all the npm packages which will be used.
 const express=require("express")
 const jwt=require("jsonwebtoken");
+const multer=require("multer");
+const fs=require("fs");
+const path = require("path");
 const datetime=require("node-datetime");
 const db=require("./database/database");
 const sms=require("./sms/sms");
 const email=require("./email/email");
-
+const upload=multer({dest:"Pictures/"});
 const app=express()
 const port=6900
 
@@ -112,13 +115,16 @@ require("./routes/Student/review")(app,db,email,sms,auth,datetime);
 require("./routes/Student/bookmark")(app,db,email,sms,auth,datetime);
 require("./routes/Student/notifications")(app,db,email,sms,auth);
 require("./routes/Student/message")(app,db,email,sms,auth,datetime);
+require("./routes/Student/picture")(app,db,auth,upload,fs,path);
 require("./routes/Services/home")(app,db,auth);
 require("./routes/Services/pg_details")(app,db,auth);
+require("./routes/Services/pg_pictures")(app,db,auth,fs,path);
 require("./routes/PG/account")(app,db,email,sms,auth_pg);
 require("./routes/PG/auth")(app,db,email,sms);
 require("./routes/PG/reviews")(app,db,email,sms,auth_pg);
 require("./routes/PG/notifications")(app,db,email,sms,auth_pg);
 require("./routes/PG/message")(app,db,email,sms,auth_pg,datetime);
+require("./routes/PG/picture")(app,db,auth_pg,upload,fs,path);
 // The routes below require verify_token as middleware.
 
 
