@@ -125,6 +125,7 @@ require("./routes/PG/reviews")(app,db,email,sms,auth_pg);
 require("./routes/PG/notifications")(app,db,email,sms,auth_pg);
 require("./routes/PG/message")(app,db,email,sms,auth_pg,datetime);
 require("./routes/PG/picture")(app,db,auth_pg,upload,fs,path);
+require("./routes/PG/rooms")(app,db,email,sms,auth_pg);
 // The routes below require verify_token as middleware.
 
 

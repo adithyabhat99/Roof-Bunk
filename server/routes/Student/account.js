@@ -64,16 +64,16 @@ module.exports=(app,db,email,sms,auth)=>{
             if(number!=uid)
             {
                 // Commented below because an SMS costs $0.04, only $14 is free, use this only when required.
-                // sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`)
+                // sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`);
             }
             res.statusCode=200;
             res.json({"message":"success","uid":uid.toString(),"type":"student"});
         });
     });
-    // Not tested.
+    // Not tested, and have to delete all the pictures uploaded by the user
     app.delete("/api/student/account",auth,(req,res)=>{
-        uid=req.decoded["uid"];
-        query=`delete from Student where UID=${uid}`;
+        let uid=req.decoded["uid"];
+        let query=`delete from Student where UID=${uid}`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -83,6 +83,62 @@ module.exports=(app,db,email,sms,auth)=>{
             }
             res.statusCode=200;
             res.json({"success":"account deleted"});
+        });
+    });
+    app.put("/api/student/account",auth,(req,res)=>{
+        let uid=req.decoded["uid"];
+        let name=req.body.name;
+        let Email=req.body.email;
+        let number=req.body.number;
+        let gender=req.body.gender;
+        let dob=req.body.dob;
+        let query=`update Student set `;
+        let array=[];
+        if(name!=null)
+        {
+            array.push(`Name='${name}'`);
+        }
+        if(Email!=null)
+        {
+            const EOTP=(Math.floor(Math.random()*9000+1000)).toString();
+            array.push(`Email='${Email}',Everified='0',EOTP='${EOTP}'`);
+            email(Email,"Verify Email",`Please verify your email\n OTP:${EOTP}`);
+        }
+        if(number!=null)
+        {
+            const OTP=(Math.floor(Math.random()*9000+1000)).toString();
+            array.push(`Contact_number='${number}',Verified='0',OTP='${OTP}'`); 
+            // sms("+91"+number,`Please verify your number\n OTP: ${OTP}`);
+        }
+        if(gender!=null)
+        {
+            array.push(`Gender='${gender}'`);
+        }
+        if(dob!=null)
+        {
+            array.push(`DOB='${dob}'`);
+        }
+        if(array.length==0)
+        {
+            res.statusCode=400;
+            res.json({"error":"send atleast one attribute out of name,email,number,gender,dob"});
+            return;
+        }
+        query+=array[0];
+        for(i=1;i<array.length;i++)
+        {
+            query+=","+array[i];
+        }
+        query+=` where UID='${uid}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=400;
+                res.json({"error":"error occered"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"message":"success"});
         });
     });
 }
