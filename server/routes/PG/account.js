@@ -1,5 +1,5 @@
 // This file contains routes to Create,Delete,Retrieve,Update PG account.
-module.exports=(app,db,email,sms,auth)=>{
+module.exports=(app,db,email,sms,auth,fs,path)=>{
     const uuid=require("uuid/v4");
     const bcrypt = require("bcrypt");
 
@@ -72,10 +72,26 @@ module.exports=(app,db,email,sms,auth)=>{
             res.json({"message":"success","uid":uid.toString(),"type":"PG"});
         });
     });
-    // Not tested, and have to delete all the picures uploaded by the owner
     app.delete("/api/pg/account",auth,(req,res)=>{
-        pgid=req.decoded["pgid"];
-        query=`delete from Owner where PGID=${pgid}`;
+        let pgid=req.decoded["uid"];
+        let query1=`select photo from PG_Pictures where PGID='${pgid}'`;
+        db.query(query1,(error,result)=>{
+            if(error)
+            {
+                console.log(error);
+                return;
+            }
+            for(i=0;i<result.length;i++)
+            {
+                try{
+                    fs.unlinkSync(__dirname+"/../../Pictures/"+result[i]["photo"]);
+                }
+                catch(err){
+                }
+            }
+        });
+        return;
+        let query=`delete from Owner where PGID=${pgid}`;
         db.query(query,(error,result)=>{
             if(error)
             {

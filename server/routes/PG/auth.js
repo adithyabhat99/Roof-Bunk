@@ -119,6 +119,76 @@ module.exports=(app,db,email,sms,auth)=>{
                 res.json({"message":"success","token":token});
             })
         });
-        //sms(number,"Your Roof and Bunk phone number is verified");
+        //sms("+91"+number,"Your Roof and Bunk phone number is verified");
+    });
+    app.put("/api/pg/reset/password",(req,res)=>{
+        const username=req.body.username;
+        if(!username)
+        {
+            res.statusCode=401;
+            res.json({"error":"send username(email/number)"});
+            return;
+        }
+        const OTP=(Math.floor(Math.random()*9000+1000)).toString();
+        let query=`update Owner set OTP='${OTP}',EOTP='${OTP}' where Email='${username}' or Contact='${username}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=401;
+                res.json({"error":"error occured"});
+                return;
+            }
+            email(username,"Reset Password",`Enter the OTP to reset password\nOTP:${OTP}`);
+            //sms("+91"+username,`Enter the OTP to reset password,OTP:'${OTP}'`);
+            res.statusCode=200;
+            res.json({"message":"success"});
+        });
+    });
+    app.post("/api/pg/reset/password",(req,res)=>{
+        const username=req.body.username;
+        const OTP=req.body.otp;
+        const passw=req.body.password;
+        if(!username || !OTP || !passw)
+        {
+            res.statusCode=401;
+            res.json({"error":"send username(email/number), otp and password"});
+            return;
+        }
+        let query1=`select OTP from Owner where Email='${username}' or Contact='${username}'`;
+        db.query(query1,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            let o=result[0]["OTP"];
+            if(!o)
+            {
+                res.statusCode=400;
+                res.json({"error":"wrong username"});
+                return;
+            }
+            if(o!=OTP)
+            {
+                res.statusCode=400;
+                res.json({"error":"wrong otp"});
+                return; 
+            }
+            const password=bcrypt.hashSync(passw,10);
+            let query2=`update Owner set Password='${password}' where Email='${username}' or Contact='${username}'`;
+            db.query(query2,(error2,result2)=>{
+                if(error)
+                {
+                    res.statusCode=401;
+                    res.json({"error":"error occured"});
+                    return;
+                }
+                email(username,"Password reset success","Your password has been reset");
+                //sms("+91"+username,"Your password reset is successful"`);
+                res.statusCode=200;
+                res.json({"message":"success"}); 
+            });
+        });
     });
 }

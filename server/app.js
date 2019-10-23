@@ -109,7 +109,7 @@ function auth_pg(req,res,next){
 // All the routes here.
 // Pass all the parameters that are required for routes
 require("./routes/hello")(app);
-require("./routes/Student/account")(app,db,email,sms,auth);
+require("./routes/Student/account")(app,db,email,sms,auth,fs,path);
 require("./routes/Student/auth")(app,db,email,sms,auth);
 require("./routes/Student/review")(app,db,email,sms,auth,datetime);
 require("./routes/Student/bookmark")(app,db,email,sms,auth,datetime);
@@ -119,7 +119,7 @@ require("./routes/Student/picture")(app,db,auth,upload,fs,path);
 require("./routes/Services/home")(app,db,auth);
 require("./routes/Services/pg_details")(app,db,auth);
 require("./routes/Services/pg_pictures")(app,db,auth,fs,path);
-require("./routes/PG/account")(app,db,email,sms,auth_pg);
+require("./routes/PG/account")(app,db,email,sms,auth_pg,fs,path);
 require("./routes/PG/auth")(app,db,email,sms);
 require("./routes/PG/reviews")(app,db,email,sms,auth_pg);
 require("./routes/PG/notifications")(app,db,email,sms,auth_pg);
