@@ -70,7 +70,7 @@ BEGIN
     (
         PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
-        photo varchar(128) not null
+        photo varchar(128) not null unique
     );
 
     #NOTE!!
@@ -78,29 +78,6 @@ BEGIN
     #not just for the specific table you are creating/altering.
     #Therefore I Have given constraint names as ID_TYPE,IDR_TYPE and IDR_TYPE
 
-    #table containing the information of student who has joined PG and is verified by the owner
-    create table if not exists Residents
-    (
-        Joined date NOT NULL,
-        Expiry date NOT NULL, #date when the student is expected to leave
-        PGID varchar(128),
-        foreign key(PGID) references Owner(PGID) on delete cascade,
-        UID varchar(128),
-        foreign key(UID) references Student(UID) on delete cascade,
-        Type int(1),
-        CONSTRAINT IDR_TYPE foreign key(PGID,Type) references Room(PGID,Type) on delete cascade
-    );
-
-    #intermediate table containing the request orders to join the PG
-    create table if not exists Request_Roof
-    (
-        UID varchar(128),
-        foreign key(UID) references Student(UID) on delete cascade,
-        PGID varchar(128),
-        foreign key(PGID) references Owner(PGID) on delete cascade,
-        Type int(1), #Enter 1 for single sharing,2 for two sharing and so on
-        CONSTRAINT IDRO_TYPE foreign key(PGID,Type) references Room(PGID,Type) on delete cascade
-    );
     create table if not exists reviews 
     ( 
         UID varchar(128), 

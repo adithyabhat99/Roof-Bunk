@@ -1,0 +1,1 @@
+create unique index pictures_index on PG_Pictures(photo);
