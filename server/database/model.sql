@@ -16,7 +16,8 @@ BEGIN
     OTP int(4) NOT NULL,
     EOTP int(4) NOT NULL,
     EVerified tinyint(1) default 0, #value is 1 if email is verified 
-    Verified tinyint(1) default 0 #value 1 is se if phone is verified
+    Verified tinyint(1) default 0, #value 1 is se if phone is verified
+    constraint check_student_gender check (Gender='M' or Gender='F' or Gender='O')
     );
 
     #creating table for the PG owner
@@ -42,7 +43,8 @@ BEGIN
         Meals tinyint(1) default 1,#Enter 1 for Meals facilities else 0
         Laundry tinyint(1) default 0,#Enter 1 for Laundry facilities else 0
         Maid tinyint(1) default 1,#Enter 1 for maid facilities else 0
-        students_preffered tinyint(1) default 1 #Enter 1 if you prefer students else 0
+        students_preffered tinyint(1) default 1, #Enter 1 if you prefer students else 0
+        constraint check_pg_gender check (Gender='M' or Gender='F' or Gender='O')
     );
 
     #table containing the important information of student when the student is about to join a particular PG
