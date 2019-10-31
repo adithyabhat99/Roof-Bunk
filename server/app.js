@@ -121,6 +121,7 @@ require("./routes/Services/pg_details")(app,db,auth);
 require("./routes/Services/pg_pictures")(app,db,auth,fs,path);
 require("./routes/Services/search")(app,db,auth);
 require("./routes/Services/rooms")(app,db,auth);
+require("./routes/Services/top_rated")(app,db,auth);
 require("./routes/PG/account")(app,db,email,sms,auth_pg,fs,path);
 require("./routes/PG/auth")(app,db,email,sms);
 require("./routes/PG/reviews")(app,db,email,sms,auth_pg);
