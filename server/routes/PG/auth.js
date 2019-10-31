@@ -38,7 +38,7 @@ module.exports=(app,db,email,sms,auth)=>{
                     return;
                 }
                 const hashed_pass=result[0]["Password"];
-                const UID=result[0]["UID"];
+                const UID=result[0]["PGID"];
                 bcrypt.compare(passw,hashed_pass,(err,r)=>{
                     if(r==false)
                     {

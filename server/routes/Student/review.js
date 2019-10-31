@@ -18,6 +18,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             {
                 res.statusCode=400;
                 res.json({"error":"error occured"});
+                console.log(error);
                 return;
             }
             res.statusCode=200;

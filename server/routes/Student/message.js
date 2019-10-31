@@ -53,20 +53,41 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"message":"success"});
         });
     });
-    app.get("/api/student/message",auth,(req,res)=>{
+    app.get("/api/student/messages",auth,(req,res)=>{
         let uid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select PGID,Owner_name,message,id,mdate from messages inner join Owner on messages.sender_id=Owner.PGID and reciever_id='${uid}' order by mdate desc limit ${num},10`;
+        let query=`select PGID,Owner_name,mdate from messages inner join Owner on messages.sender_id=Owner.PGID and reciever_id='${uid}' order by mdate desc limit ${num},10`;
         db.query(query,(error,result)=>{
             if(error)
             {
               res.statusCode=400;
-              console.log(error);
               res.json({"error":"error occured"});
               return;  
             }
             res.statusCode=200;
             res.json(result);
+        });
+    });
+    app.get("/api/student/message",auth,(req,res)=>{
+        let uid=req.decoded["uid"];
+        let sid=req.body.sid;
+        let num=(req.body.num!=null)?req.body.num*10:0;
+        if(!sid)
+        {
+            res.statusCode=400;
+            res.json({"error":"please send sender id"});
+            return;
+        }
+        let query=`select id,message,mdate from messages where sender_id='${sid}' and reciever_id='${uid}' order by mdate desc limit ${num},10`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"messages":result});
         });
     });
 }

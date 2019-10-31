@@ -147,4 +147,18 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
             res.json({"message":"success"});
         });
     });
+    app.get("/api/student/account",auth,(req,res)=>{
+        let uid=req.decoded["uid"];
+        let query=`select UID,Name,Contact_number,Email,Gender,DOB from Student where UID='${uid}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=400;
+                res.json({"error":"an error occered"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"details":result[0]});
+        });
+    });
 }

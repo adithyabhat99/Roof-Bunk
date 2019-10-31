@@ -90,7 +90,6 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 }
             }
         });
-        return;
         let query=`delete from Owner where PGID=${pgid}`;
         db.query(query,(error,result)=>{
             if(error)
@@ -144,7 +143,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
         }
         if(desc!=null)
         {
-            array.push(`set Description='${desc}'`);
+            array.push(`Description='${desc}'`);
         }
         if(lat!=null && lng!=null)
         {
@@ -204,6 +203,20 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
             }
             res.statusCode=200;
             res.json({"message":"success"});
+        });
+    });
+    app.get("/api/pg/account",auth,(req,res)=>{
+        let pgid=req.decoded["uid"];
+        query=`select Pg_name,Owner_name,Contact,Email,Description,lat,lng,Gender,Bathroom,Wifi,AC,Meals,Laundry,Maid,students_preffered,avg(rating) as avg_rating from Owner inner join reviews on Owner.PGID=reviews.PGID and Owner.PGID='${pgid}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                res.statusCode=400;
+                res.json({"error":"an error occered"});
+                return;
+            }
+            res.statusCode=200;
+            res.json({"details":result[0]});
         });
     });
 }
