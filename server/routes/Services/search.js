@@ -1,5 +1,5 @@
 module.exports=(app,db,auth)=>{
-    app.get("/api/student/search",auth,(req,res)=>{
+    app.post("/api/student/search",auth,(req,res)=>{
         let lat=req.body.lat;
         let lng=req.body.lng;
         let name=req.body.name;
@@ -22,7 +22,7 @@ module.exports=(app,db,auth)=>{
                 return;
             }
             res.statusCode=200;
-            res.json({"pg_list":result[0]});
+            res.json(result[0]);
         });
     });
 }

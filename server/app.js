@@ -15,7 +15,8 @@ const port=6900
 // Middleware added to all routes to support Cross Origin Resource Sharing.
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    res.header("Access-Control-Allow-Methods","POST, PUT, GET, OPTIONS");
     next();
 });
 // Middleware to accept post requests.
@@ -122,6 +123,7 @@ require("./routes/Services/pg_pictures")(app,db,auth,fs,path);
 require("./routes/Services/search")(app,db,auth);
 require("./routes/Services/rooms")(app,db,auth);
 require("./routes/Services/top_rated")(app,db,auth);
+require("./routes/Services/avg_rating")(app,db,auth);
 require("./routes/PG/account")(app,db,email,sms,auth_pg,fs,path);
 require("./routes/PG/auth")(app,db,email,sms);
 require("./routes/PG/reviews")(app,db,email,sms,auth_pg);

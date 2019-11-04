@@ -50,12 +50,13 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
         const EOTP=(Math.floor(Math.random()*9000+1000)).toString();
         const lat=req.body.lat;
         const lng=req.body.lng;
-        query=`insert into Owner(PGID,pgname,ownername,Contact,Email,Password,Gender,OTP,EOTP,lat,lng) 
+        query=`insert into Owner(PGID,Pg_name,Owner_name,Contact,Email,Password,Gender,OTP,EOTP,lat,lng) 
         values('${uid}','${pgname}','${ownername}','${number}','${mail}','${password}','${gender}','${OTP}','${EOTP}','${lat}','${lng}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
                 res.statusCode=400;
+                console.log(error);
                 res.json({"error":"problem occured"});
                 return;
             }

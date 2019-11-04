@@ -78,7 +78,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"please send sender id"});
             return;
         }
-        let query=`select id,message,mdate from messages where sender_id='${sid}' and reciever_id='${uid}' order by mdate desc limit ${num},10`;
+        let query=`select id,message,mdate,reciever_id from messages where (sender_id='${sid}' and reciever_id='${uid}') or (sender_id='${uid}' and reciever_id='${sid}') order by mdate desc limit ${num},10`;
         db.query(query,(error,result)=>{
             if(error)
             {

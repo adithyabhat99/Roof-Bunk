@@ -43,7 +43,7 @@ module.exports=(app,db,email,sms)=>{
                     if(r==false)
                     {
                         res.statusCode=401;
-                        res.json({"eroor":"wrong passwod"});
+                        res.json({"error":"wrong passwod"});
                     }
                     const token=jwt.sign({
                         exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
@@ -51,7 +51,7 @@ module.exports=(app,db,email,sms)=>{
                         type:"student"
                     },auth_config["secret"]);
                     res.statusCode=200;
-                    res.json({"message":"success","token":token});
+                    res.json({"message":"success","token":token,uid:UID.toString()});
                 });
             });
         });
@@ -61,6 +61,12 @@ module.exports=(app,db,email,sms)=>{
     app.post("/api/student/verify/email",(req,res)=>{
         const otp=req.body.otp;
         const mail=req.body.email;
+        if(!otp || !mail)
+        {
+            res.statusCode=400;
+            res.json({"error":"send email and otp"});
+            return;
+        }
         query1=`update Student set EVerified=1 where Email='${mail}' and EOTP='${otp}'`;
         query2=`select UID from Student where Email='${mail}'`;
         db.query(query1,(error,result)=>{

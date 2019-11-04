@@ -54,6 +54,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
             if(error)
             {
                 res.statusCode=400;
+                console.log(error);
                 res.json({"error":"problem occured"});
                 return;
             }
@@ -103,7 +104,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
         if(name!=null)
         {
             array.push(`Name='${name}'`);
-        }
+        } 
         if(Email!=null)
         {
             const EOTP=(Math.floor(Math.random()*9000+1000)).toString();
@@ -144,7 +145,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 return;
             }
             res.statusCode=200;
-            res.json({"message":"success"});
+            res.json({"message":"success","uid":uid.toString(),"type":"student"});
         });
     });
     app.get("/api/student/account",auth,(req,res)=>{

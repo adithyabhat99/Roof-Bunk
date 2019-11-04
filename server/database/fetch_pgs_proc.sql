@@ -1,12 +1,12 @@
 delimiter |
-create procedure fetch_pgs(in Lat float(10,6),in Lng float(10,6),in num int,dis int,in g char(1))
+create procedure fetch_pgs(in L float(10,6),in Ln float(10,6),in num int,dis int,in g char(1))
 begin 
-select PGID,(6371*acos (
-            cos ( radians(Lat) )
+select (6371*acos (
+            cos ( radians(L) )
             * cos( radians( lat ) )
-            * cos( radians( lng ) - radians(Lng) )
-            + sin ( radians(Lat) )
-            * sin( radians( lat ) ))) as distance,lat,lng,Pg_name,Gender from Owner having distance<dis and Gender=g
+            * cos( radians( lng ) - radians(Ln) )
+            + sin ( radians(L) )
+            * sin( radians( lat ) ))) as distance,lat,lng,Pg_name,Gender,PGID from Owner having Gender=g and distance<dis
             order by distance limit num,10;
 end |
 delimiter ;

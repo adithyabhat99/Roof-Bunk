@@ -51,7 +51,7 @@ module.exports=(app,db,email,sms,auth)=>{
                         type:"pg"
                     },auth_config["secret"]);
                     res.statusCode=200;
-                    res.json({"message":"success","token":token});
+                    res.json({"message":"success","token":token,uid:UID.toString()});
                 });
             });
         });
