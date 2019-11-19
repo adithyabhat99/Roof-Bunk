@@ -1,0 +1,137 @@
+.mynav .navbar
+{
+    margin-top:0px;
+    margin-bottom: 0px;
+}
+
+.dash{
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    height: 590px;
+    margin-top: 0px;
+}
+.pics{
+    background-color: rgb(48, 44, 44);
+    border-color: #222121;
+    overflow-y: scroll;
+    max-height: 100%;
+    overflow-x: hidden;
+}
+.stats{
+    background-color: rgb(48, 44, 44);
+    border-color: #222121; 
+    overflow-y: scroll;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.not{
+    text-align: center;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+    flex: 50%;
+    max-width: 50%;
+    padding: 0 3px;
+}
+
+.column img {
+    margin-top: 5px;
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+.up{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px;
+}
+.head-pics{
+    color: aliceblue;
+    text-align: center;
+}
+
+
+.btn-grey{
+    background-color:#D8D8D8;
+    color:#FFF;
+}
+.rating-block{
+    background-color:#FAFAFA;
+    border:1px solid #EFEFEF;
+    padding:15px 15px 20px 15px;
+    border-radius:3px;
+}
+.bold{
+    font-weight:700;
+}
+.padding-bottom-7{
+    padding-bottom:7px;
+}
+
+.review-block{
+    background-color:#FAFAFA;
+    border:1px solid #EFEFEF;
+    padding:15px;
+    border-radius:3px;
+    margin-bottom:15px;
+}
+.review-block-name{
+    font-size:12px;
+    margin:10px 0;
+}
+.review-block-date{
+    font-size:12px;
+}
+.review-block-rate{
+    font-size:13px;
+    margin-bottom:15px;
+}
+.review-block-title{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+.review-block-description{
+    font-size:13px;
+}
+li{
+    text-align: center;
+    cursor: pointer;
+}
+.username
+{
+    cursor: pointer; 
+}
+.img-rounded{
+    max-width: 100px;
+}
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.row{
+    margin: 0;
+}

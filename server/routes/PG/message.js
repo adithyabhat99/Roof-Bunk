@@ -11,7 +11,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"uid and message required"});
             return;
         }
-        query=`insert into messages(sender_type,sender_id,reciever_id,mdate) values('P','${pgid}','${uid}','${now}')`;
+        query=`insert into messages(sender_type,sender_id,reciever_id,mdate,message) values('P','${pgid}','${uid}','${now}','${message}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -56,11 +56,12 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
     app.get("/api/pg/messages",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select UID,Name,mdate from messages inner join Student on messages.sender_id=Student.UID and reciever_id='${pgid}' order by mdate desc limit ${num},10`;
+        let query=`select distinct UID,Name from messages inner join Student on messages.sender_id=Student.UID and reciever_id='${pgid}' limit ${num},10`;
         db.query(query,(error,result)=>{
             if(error)
             {
               res.statusCode=400;
+              console.log(error)
               res.json({"error":"error occured"});
               return;  
             }
@@ -68,14 +69,14 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json(result);
         });
     });
-    app.get("/api/pg/message",auth,(req,res)=>{
+    app.put("/api/pg/message",auth,(req,res)=>{
         let uid=req.decoded["uid"];
         let sid=req.body.sid;
         let num=(req.body.num!=null)?req.body.num*10:0;
         if(!sid)
         {
             res.statusCode=400;
-            res.json({"error":"please send sender id"});
+            res.json({"error":"please send sender id(sid)"});
             return;
         }
         let query=`select id,message,mdate,reciever_id from messages where (sender_id='${sid}' and reciever_id='${uid}') or (sender_id='${uid}' and reciever_id='${sid}') order by mdate desc limit ${num},10`;

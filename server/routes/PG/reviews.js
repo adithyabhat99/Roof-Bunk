@@ -15,4 +15,19 @@ module.exports=(app,db,email,sms,auth)=>{
             res.json(result);
         });
     });
+    app.get("/api/pg/avg_rating",auth,(req,res)=>{
+        let pgid=req.decoded["uid"];
+        query=`select avg(rating) from reviews where PGID='${pgid}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                console.log(error);
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            res.statusCode=200;
+            res.json(result);
+        });
+    });
 }

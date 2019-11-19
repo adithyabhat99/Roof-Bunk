@@ -48,7 +48,7 @@ function home()
                 box.className="border-box";
                 box.setAttribute("lat",d[i]["lat"]);
                 box.setAttribute("lng",d[i]["lng"]);
-                box.setAttribute("pgid",d[i]["pgid"]);
+                box.setAttribute("pgid",d[i]["PGID"]);
                 let h2=document.createElement("h2");
                 h2.className="pg_name";
                 h2.innerText=d[i]["Pg_name"];
@@ -57,7 +57,7 @@ function home()
                 h1.innerText=(d[i]["Gender"]=="M")?"Male":"Female";
                 let h11=document.createElement("h1");
                 h11.className="pg_distance";
-                h11.innerText=(parseFloat(d[i]["distance"]).toFixed(6)).toString()+"km";
+                h11.innerText=(parseFloat(d[i]["distance"]).toFixed(1)).toString()+"km";
                 let button=document.createElement("button");
                 button.className="pg_details_button";
                 button.innerText="See details";
@@ -92,13 +92,13 @@ function home()
                             a[j].className="fa fa-star "+b[j];
                             if(rating!=null && j<rating-1)
                                 a[j].className+=" checked";
-                            
+                            box.appendChild(a[j]);
                         }
                         let parent=document.querySelector("#parent");
                         box.appendChild(button);
                         parent.appendChild(box);
                     });
-                })
+                });
             }
         });
     });
@@ -110,6 +110,7 @@ function search()
     {
         p.removeChild(p.lastElementChild);
     }
+    document.getElementById("text_pg").innerText="Search Results";
     let g1=document.querySelector(".g1").checked;
     let g2=document.querySelector(".g2").checked;
     let pgname=document.querySelector(".pg_name_search").value;
@@ -155,7 +156,7 @@ function search()
                 box.className="border-box";
                 box.setAttribute("lat",d[i]["lat"]);
                 box.setAttribute("lng",d[i]["lng"]);
-                box.setAttribute("pgid",d[i]["pgid"]);
+                box.setAttribute("pgid",d[i]["PGID"]);
                 let h2=document.createElement("h2");
                 h2.className="pg_name";
                 h2.innerText=d[i]["Pg_name"];
@@ -164,7 +165,7 @@ function search()
                 h1.innerText=(d[i]["Gender"]=="M")?"Male":"Female";
                 let h11=document.createElement("h1");
                 h11.className="pg_distance";
-                h11.innerText=(parseFloat(d[i]["distance"]).toFixed(6)).toString()+"km";
+                h11.innerText=(parseFloat(d[i]["distance"]).toFixed(1)).toString()+"km";
                 let button=document.createElement("button");
                 button.className="pg_details_button";
                 button.innerText="See details";
@@ -199,13 +200,13 @@ function search()
                             a[j].className="fa fa-star "+b[j];
                             if(rating!=null && j<rating-1)
                                 a[j].className+=" checked";
-                            
+                            box.appendChild(a[j]);
                         }
                         let parent=document.querySelector("#parent");
                         box.appendChild(button);
                         parent.appendChild(box);
                     });
-                })
+                });
             }
         });
     });

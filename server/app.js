@@ -16,7 +16,7 @@ const port=6900
 app.use((req,res,next)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
-    res.header("Access-Control-Allow-Methods","POST, PUT, GET, OPTIONS");
+    res.header("Access-Control-Allow-Methods","POST, PUT, GET, OPTIONS, DELETE");
     next();
 });
 // Middleware to accept post requests.
@@ -131,6 +131,8 @@ require("./routes/PG/notifications")(app,db,email,sms,auth_pg);
 require("./routes/PG/message")(app,db,email,sms,auth_pg,datetime);
 require("./routes/PG/picture")(app,db,auth_pg,upload,fs,path);
 require("./routes/PG/rooms")(app,db,email,sms,auth_pg);
+
+require("./routes/Services/get_name")(app,db);
 // The routes below require verify_token as middleware.
 
 

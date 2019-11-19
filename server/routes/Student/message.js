@@ -11,12 +11,13 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"pgid and message required"});
             return;
         }
-        query=`insert into messages(sender_type,sender_id,reciever_id,mdate) values('S','${uid}','${pgid}','${now}')`;
+        query=`insert into messages(sender_type,sender_id,reciever_id,mdate,message) values('S','${uid}','${pgid}','${now}','${message}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
               res.statusCode=400;
               res.json({"error":"error occured"});
+              console.log(error)
               return;  
             }
             res.statusCode=200;
@@ -56,7 +57,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
     app.get("/api/student/messages",auth,(req,res)=>{
         let uid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select PGID,Owner_name,mdate from messages inner join Owner on messages.sender_id=Owner.PGID and reciever_id='${uid}' order by mdate desc limit ${num},10`;
+        let query=`select distinct PGID,Owner_name,mdate from messages inner join Owner on messages.sender_id=Owner.PGID and reciever_id='${uid}' limit ${num},10`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -68,7 +69,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json(result);
         });
     });
-    app.get("/api/student/message",auth,(req,res)=>{
+    app.put("/api/student/message",auth,(req,res)=>{
         let uid=req.decoded["uid"];
         let sid=req.body.sid;
         let num=(req.body.num!=null)?req.body.num*10:0;
