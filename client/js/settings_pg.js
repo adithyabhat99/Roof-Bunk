@@ -163,6 +163,32 @@ document.addEventListener("DOMContentLoaded",()=>{
             });
         });
     });
+    document.querySelector(".delete_button").addEventListener("click",event=>{
+        event.preventDefault();
+        let t=confirm("Are you sure?");
+        if(t==false)
+            return;
+        fetch(host+"/api/pg/account",{
+            method:"DELETE",
+            headers:basicHeader
+        })
+        .then(r=>r.json())
+        .then(d=>{
+            if(d.hasOwnProperty("error"))
+            {
+                alert("Error");
+                console.log(d);
+                return;
+            }
+            window.localStorage.removeItem("pg_token");
+            location.href="../login/2options.html";
+        });
+    });
+    document.querySelector(".logout_button").addEventListener("click",event=>{
+        event.preventDefault();
+        window.localStorage.removeItem("pg_token");
+        location.href="../login/2options.html";
+    });
 });
 function otp_handler(email)
 {

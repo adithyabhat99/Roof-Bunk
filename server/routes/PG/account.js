@@ -91,7 +91,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 }
             }
         });
-        let query=`delete from Owner where PGID=${pgid}`;
+        let query=`call delete_pg('${pgid}')`;
         db.query(query,(error,result)=>{
             if(error)
             {

@@ -73,7 +73,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
     });
     app.delete("/api/student/account",auth,(req,res)=>{
         let uid=req.decoded["uid"];
-        let query=`delete from Student where UID=${uid}`;
+        let query=`call delete_stud('${uid}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
