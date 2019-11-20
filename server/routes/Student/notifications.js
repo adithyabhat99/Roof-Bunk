@@ -15,13 +15,6 @@ module.exports=(app,db,email,sms,auth)=>{
     });
     app.put("/api/student/notifications",auth,(req,res)=>{
         let uid=req.decoded["uid"];
-        let id=req.body.id;
-        if(!id)
-        {
-            res.statusCode=400;
-            res.json({"error":"send notification id"});
-            return;
-        }
         let query=`update student_notifications set read_status=1 where UID='${uid}'`;
         db.query(query,(error,result)=>{
             if(error)

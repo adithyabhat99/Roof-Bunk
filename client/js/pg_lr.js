@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                 return;
             }
             window.localStorage.setItem("pg_token",data["token"]);
-            location.href="../an-ad-deek/index.html"
+            location.href="../pg/dashboard.html";
         })
     });
     document.getElementById("submit_register").addEventListener("click",event=>{
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                     }
                     window.localStorage.setItem("pg_token",d["token"]);
                     window.localStorage.setItem("uid",d["uid"]);
-                    location.href="../an-ad-deek/index.html";
+                    location.href="../pg/dashboard.html";
                 });
             });
         });

@@ -80,4 +80,48 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"message":"success"});
         }); 
     });
+    app.put("/api/student/reviews",auth,(req,res)=>{
+        let pgid=req.body.pgid;
+        let num=(req.body.num!=null)?req.body.num*10:0;
+        if(!pgid)
+        {
+            res.statusCode=400;
+            res.json({"error":"pgid required"});
+            return;
+        }
+        query=`select Student.UID,Name,review,rating,rdate from reviews inner join Student on PGID='${pgid}' and reviews.UID=Student.UID order by rdate desc limit ${num},20`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                console.log(error);
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            res.statusCode=200;
+            res.json(result);
+        });
+    });
+    app.put("/api/student/my_review",auth,(req,res)=>{
+        let uid=req.decoded["uid"];
+        let pgid=req.body.pgid;
+        if(!pgid)
+        {
+            res.statusCode=400;
+            res.json({"error":"pgid required"});
+            return;
+        }
+        query=`select Name,review,rating,rdate from reviews inner join Student on PGID='${pgid}' and reviews.UID='${uid}' and Student.UID='${uid}'`;
+        db.query(query,(error,result)=>{
+            if(error)
+            {
+                console.log(error);
+                res.statusCode=400;
+                res.json({"error":"error occured"});
+                return;
+            }
+            res.statusCode=200;
+            res.json(result);
+        });
+    });
 }

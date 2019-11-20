@@ -6,13 +6,14 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="../an-ad-deek/assets/css/main.css" />
-		<script src="../js/settings_student.js"></script>
+		<script src="../js/messages_nots_pg.js"></script>
+		<script src="../js/settings_pg.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-		<script src="../js/messages_nots_pg.js"></script>
+		<link rel="stylesheet" href="settings.css">
 	</head>
-	<body >
+	<body>
 
 	<!-- Header -->
 	<div class="mynav">
@@ -35,9 +36,7 @@
 						<a class="dropdown-toggle messages" data-toggle="dropdown" href="#">Messages
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu mparent">
-							<li class="mes">Hi Lorem ipsum dolor</li>
-							<li class="mes">Hi</li>
-							<li class="mes">Hi</li>
+							<!--  -->
 						</ul>
 					</li>
 					</ul>
@@ -80,14 +79,20 @@
                 <br>
 				<label for="e">Change Description</label>
                 <input type="text" placeholder="Description" id="desc">
-                <br>
+				<br>
+				<label for="">Gender?</label>
+				<select class="form-control" id="gender">	
+					<option>M</option>
+					<option>F</option>
+				</select>
+				<br>
 				<label for="">Food in PG?</label>
 				<select class="form-control" id="meal">	
 					<option>No</option>
 					<option>Yes</option>
 				</select>
 				<br>
-				<label for=""></label>Attached bathroom?</label>
+				<label for="">Attached bathroom?</label>
 				<select class="form-control" id="bathroom">	
 					<option>No</option>
 					<option>Yes</option>
@@ -117,10 +122,45 @@
 					<option>Yes</option>
 				</select>
 				<br>
+				<span class="location">
+					<p class="lat"></p>
+					<p class="lng"></p>
+				</span>
 				<input type="submit" class="loc_button" value="Change location">
 				<br>
 				<br>
-                <input type="submit" class="update_button" value="Save">
+				<input type="submit" class="update_button" value="Save">
+				<br>
+				<h3 align="center">Change room details<h3>
+				<br>
+
+				
+				<div class="rooms">
+					<div class="rooms-row-head">
+						<h4>Room Type</h4>
+						<h4>Empty Rooms</h4>
+						<h4>Price</h4>
+					</div>
+					<!-- <div class="rooms-row">
+						<h4 class="type">1</h4>
+						<input type="text" placeholder="10" class="empty">
+						<input type="text" placeholder="5000" class="price">
+						<button class="change-room">Change</button>
+					</div>
+					<div class="rooms-row">
+						<h4 class="type">1</h4>
+						<input type="text" placeholder="10" class="empty">
+						<input type="text" placeholder="5000" class="price">
+						<button class="change-room">Change</button>
+					</div> -->
+					<div class="rooms-add">
+						<input type="text" placeholder="Type" class="n-type">
+						<input type="text" placeholder="Empty rooms" class="n-empty">
+						<input type="text" placeholder="Price" class="n-price">
+						<button class="add-room">Add room</button>
+					</div>
+				</div>
+
             	</fieldset>            
                             </body>
 							
@@ -144,11 +184,11 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="../an-ad-deek/assets/js/jquery.min.js"></script>
+			<script src="../an-ad-deek/assets/js/jquery.scrollex.min.js"></script>
+			<script src="../an-ad-deek/assets/js/skel.min.js"></script>
+			<script src="../an-ad-deek/assets/js/util.js"></script>
+			<script src="../an-ad-deek/assets/js/main.js"></script>
 
 	</body>
 </html>

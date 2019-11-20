@@ -1,5 +1,5 @@
 module.exports=(app,db,auth)=>{
-    app.get("/api/student/rooms",auth,(req,res)=>{
+    app.put("/api/student/rooms",auth,(req,res)=>{
         let pgid=req.body.pgid;
         if(!pgid)
         {

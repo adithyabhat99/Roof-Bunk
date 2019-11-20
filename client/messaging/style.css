@@ -18,7 +18,7 @@ img{
     height:10%;
     border-bottom: none;
     display:inline-block;
-    background-color: #007bff;
+    background-color: #222121;
 }
 .msg-header-img
 {
@@ -115,7 +115,7 @@ img{
 }
 .outgoing-chats-msg p
 {
-    background: #007bff none repeat scroll 0 0 ;
+    background: rgb(48, 44, 44) none repeat scroll 0 0 ;
     color:#fff;
     border-radius: 10px;
     font-size: 14px;

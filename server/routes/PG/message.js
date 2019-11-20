@@ -56,7 +56,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
     app.get("/api/pg/messages",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select distinct UID,Name from messages inner join Student on messages.sender_id=Student.UID and reciever_id='${pgid}' limit ${num},10`;
+        let query=`select distinct UID,Name from messages inner join Student on messages.sender_id=Student.UID and reciever_id='${pgid}' limit ${num},20`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -79,7 +79,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"please send sender id(sid)"});
             return;
         }
-        let query=`select id,message,mdate,reciever_id from messages where (sender_id='${sid}' and reciever_id='${uid}') or (sender_id='${uid}' and reciever_id='${sid}') order by mdate desc limit ${num},10`;
+        let query=`select id,message,mdate,reciever_id from messages where (sender_id='${sid}' and reciever_id='${uid}') or (sender_id='${uid}' and reciever_id='${sid}') order by mdate desc limit ${num},20`;
         db.query(query,(error,result)=>{
             if(error)
             {

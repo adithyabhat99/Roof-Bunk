@@ -1,7 +1,7 @@
 module.exports=(app,db,auth)=>{
     app.get("/api/student/top_rated",auth,(req,res)=>{
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select * from top_rated limit ${num},10`;
+        let query=`select * from top_rated limit ${num},20`;
         db.query(query,(error,result)=>{
             if(error)
             {

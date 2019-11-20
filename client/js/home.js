@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded",()=>{
         event.preventDefault();
         search();
     });
+    document.querySelector("#parent").addEventListener("click",event=>{
+        let t=event.target;
+        if(t.className=="pg_details_button")
+        {
+            let pgid=t.parentNode.getAttribute("pgid");
+            let dis=t.parentNode.getAttribute("distance");
+            location.href=`../pg/pg_details.html?pgid=${pgid}&distance=${dis}`;
+        }
+    });
 });
 
 function home()
@@ -49,6 +58,7 @@ function home()
                 box.setAttribute("lat",d[i]["lat"]);
                 box.setAttribute("lng",d[i]["lng"]);
                 box.setAttribute("pgid",d[i]["PGID"]);
+                box.setAttribute("distance",d[i]["distance"]);
                 let h2=document.createElement("h2");
                 h2.className="pg_name";
                 h2.innerText=d[i]["Pg_name"];
@@ -65,7 +75,7 @@ function home()
                 let b=["one","two","three","four","five"];
                 let pgid=d[i]["PGID"];
                 fetch(host+"/api/student/pg_picture_1",{
-                    method:"POST",
+                    method:"PUT",
                     headers:basicHeader,
                     body:JSON.stringify({"pgid":d[i]["PGID"]})
                 })

@@ -1,0 +1,10 @@
+.rooms-row , .rooms-row-head , .rooms-add{
+    margin-left: 10%;
+    margin-right: 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+h4{
+    text-align: center;
+}

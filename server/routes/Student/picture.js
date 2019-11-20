@@ -58,4 +58,24 @@ module.exports=(app,db,auth,upload,fs,path)=>{
             res.sendFile(path.resolve(__dirname+"/../../Pictures/default.jpg"));
         }
     });
+    app.put("/api/student/student_picture",auth,(req,res)=>{
+        let uid=req.body.uid;
+        if(!uid)
+        {
+            res.statusCode=400;
+            res.json({"error":"send uid"});
+            return;
+        }
+        let p=path.resolve(__dirname+"/../../Pictures/"+uid+".jpg");
+        if(fs.existsSync(path.resolve(__dirname+"/../../Pictures/"+uid+".jpg")))
+        {
+            res.statusCode=200;
+            res.sendFile(p);
+        }
+        else
+        {
+            res.statusCode=200;
+            res.sendFile(path.resolve(__dirname+"/../../Pictures/default.jpg"));
+        }
+    });
 }

@@ -126,6 +126,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         document.querySelector(".typedMessage").value="";
     });
+    document.querySelector(".msg-page").addEventListener("dblclick",event=>{
+        console.log("1");
+        let t=event.target;
+        if(t.className=="m")
+        {
+            let id=t.getAttribute("id");
+            let p=confirm("Are you sure?");
+            if(p==true)
+            {
+                fetch(host+"/message",{
+                    method:"DELETE",
+                    headers:basicHeader,
+                    body:JSON.stringify({"mid":id})
+                })
+                .then(r=>r.json())
+                .then(d=>{
+                    if(d.hasOwnProperty("error"))
+                    {
+                        alert("Error occured");
+                        console.log(d);
+                        return;
+                    }
+                    alert("Success!, Changes will be seen after refresh");
+                })
+            }
+        }
+    });
 });
 
 function fetch_all() {
@@ -189,6 +216,7 @@ function fetch_all() {
                     p=document.createElement("p");
                     p.className="m";
                     p.innerText=messages[i]["message"];
+                    p.setAttribute("id",messages[i]["id"]);
                     t=document.createElement("span");
                     t.className="time";
                     let dateObj = new Date(messages[i]["mdate"]);
@@ -216,7 +244,7 @@ function fetch_image()
     if(type=="student")
     {
         fetch(host+"/pg_picture_1",{
-            method:"POST",
+            method:"PUT",
             headers:basicHeader,
             body:JSON.stringify({"pgid":sid})
         })
