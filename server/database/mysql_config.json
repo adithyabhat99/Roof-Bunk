@@ -1,0 +1,7 @@
+{
+    "host":"localhost",
+    "user":"root",
+    "password":"123654654",
+    "database":"roofbunk_test",
+    "connectTimeout": 10000
+}
