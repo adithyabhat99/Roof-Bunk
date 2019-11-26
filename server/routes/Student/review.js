@@ -12,7 +12,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
         }
         let d=datetime.create();
         let now=d.format('Y-m-d H:M:S');
-        let query=`insert into reviews values('${uid}','${pgid}','${review}','${rating}','${now}')`;
+        let query=`insert into reviews(UID,PGID,review,rating,rdate) values('${uid}','${pgid}','${review}','${rating}','${now}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -22,12 +22,14 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
                 return;
             }
             res.statusCode=200;
+            console.log(1)
             res.json({"message":"success"});
         });
         let query2=`select Email,Contact from Owner where PGID='${pgid}'`;
             db.query(query2,(e,r)=>{
                 if(e)
                 {
+                    console.log(e);
                     return;
                 }
                 let email_id=r[0]["Email"];
@@ -111,7 +113,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"pgid required"});
             return;
         }
-        query=`select Name,review,rating,rdate from reviews inner join Student on PGID='${pgid}' and reviews.UID='${uid}' and Student.UID='${uid}'`;
+        query=`select Name,review,rating,rdate from reviews inner join Student on PGID='${pgid}' and reviews.UID='${uid}'`;
         db.query(query,(error,result)=>{
             if(error)
             {

@@ -6,6 +6,7 @@ module.exports=(app,db,email,sms,auth)=>{
         db.query(query,(error,result)=>{
             if(error)
             {
+                console.log(error);
                 res.statusCode=400;
                 res.json({"error":"error eccured"});
             }

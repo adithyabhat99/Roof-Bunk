@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.querySelector(".submit_review").addEventListener("click",event=>{
         event.preventDefault();
         reviewed=document.querySelector(".write-review").getAttribute("reviewed");
-        if(!reviewed)
+        if(reviewed=="false")
         {
             post_review("POST");
         }
@@ -335,8 +335,9 @@ function loadDetails()
             return;
         }
         d=d[0];
-        if(Object.keys(d).length === 0)
+        if(!d)
         {
+            document.querySelector(".write-review").setAttribute("reviewed",false);
             return;
         }
         document.querySelector(".review-text").placeholder=d["review"];
@@ -412,10 +413,7 @@ function post_review(method)
             console.log(d);
             return;
         }
-        if(method=="PUT")
-        {
-            reviewed=document.querySelector(".write-review").setAttribute("reviewed",true);
-        }
+        reviewed=document.querySelector(".write-review").setAttribute("reviewed",true);
         alert("Thank you for your review!");
     });
 }

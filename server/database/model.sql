@@ -115,7 +115,8 @@ BEGIN
         foreign key(UID) references Student(UID) on delete cascade,  
         ndate datetime not null, 
         type varchar(10) not null,
-        message text not null
+        message text not null,
+        read_status tinyint(1) default 0
     );
     create table if not exists messages 
     ( 

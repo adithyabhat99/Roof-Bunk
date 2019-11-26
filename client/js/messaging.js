@@ -33,6 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
     {
         document.querySelector(".info").style.display="none";
     }
+    else
+    {
+        document.querySelector(".info").setAttribute("pgid",sid);
+    }
+    document.querySelector(".info").addEventListener("click",event=>{
+        event.preventDefault();
+        let pgid=event.target.getAttribute("pgid");
+        location.href=`../pg/pg_details.html?pgid=${pgid}&distance=5`;
+    });
     document.querySelector(".sendButton").addEventListener("click",event=>{
         let message=document.querySelector(".typedMessage").value;
         let parent=document.querySelector(".msg-page");
