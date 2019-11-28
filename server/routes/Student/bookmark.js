@@ -54,7 +54,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
                 return;
             }
             res.statusCode=200;
-            res.json({"message":"success"});
+            res.json({"message":"success!"});
         });
     });
 }
