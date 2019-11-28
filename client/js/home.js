@@ -31,7 +31,7 @@ function home()
     navigator.geolocation.getCurrentPosition((position)=>{
         lat=position.coords.latitude.toFixed(6);
         lng=position.coords.longitude.toFixed(6);
-        let gender="M"
+        let gender="M";
         let data={
             lat,
             lng,
@@ -183,7 +183,7 @@ function search()
                 let b=["one","two","three","four","five"];
                 let pgid=d[i]["PGID"];
                 fetch(host+"/api/student/pg_picture_1",{
-                    method:"POST",
+                    method:"PUT",
                     headers:basicHeader,
                     body:JSON.stringify({"pgid":d[i]["PGID"]})
                 })

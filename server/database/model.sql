@@ -19,7 +19,6 @@ BEGIN
     Verified tinyint(1) default 0, #value 1 is se if phone is verified
     constraint check_student_gender check (Gender='M' or Gender='F' or Gender='O')
     );
-
     #creating table for the PG owner
     create table if not exists Owner
     (
@@ -46,17 +45,6 @@ BEGIN
         students_preffered tinyint(1) default 1, #Enter 1 if you prefer students else 0
         constraint check_pg_gender check (Gender='M' or Gender='F' or Gender='O')
     );
-
-    #table containing the important information of student when the student is about to join a particular PG
-    create table if not exists Student_Critical_Info
-    (
-        Home_address varchar(255) NOT NULL,
-        Emergency_contact varchar(128) NOT NULL UNIQUE KEY,
-        Education varchar(255), #description of education details of the student
-        UID varchar(128),
-        foreign key(UID) references Student(UID) on delete cascade
-    );
-
     #table containing the description of the rooms(There can be different types of rooms in a PG)
     create table if not exists Room
     (
@@ -67,19 +55,12 @@ BEGIN
         Price int(5),#gives price per month
         CONSTRAINT ID_TYPE primary key(PGID,Type)
     );
-
     create table if not exists PG_Pictures 
     (
         PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
         photo varchar(128) not null unique
     );
-
-    #NOTE!!
-    #Constraints must be unique for the entire database, 
-    #not just for the specific table you are creating/altering.
-    #Therefore I Have given constraint names as ID_TYPE,IDR_TYPE and IDR_TYPE
-
     create table if not exists reviews 
     ( 
         UID varchar(128), 
@@ -90,15 +71,6 @@ BEGIN
         rating int not null, 
         rdate datetime not null,
         CONSTRAINT rid primary key(UID,PGID) 
-    );
-    create table if not exists bookmarks 
-    (
-        UID varchar(128),  
-        foreign key(UID) references Student(UID) on delete cascade, 
-        PGID varchar(128),  
-        foreign key(PGID) references Owner(PGID) on delete cascade, 
-        bdate datetime not null, 
-        constraint bookmark_con primary key(UID,PGID) 
     );
     create table if not exists pg_notifications 
     ( 
@@ -125,7 +97,8 @@ BEGIN
         sender_id varchar(128) not null, 
         reciever_id varchar(128) not null, 
         message varchar(255) not null,
-        mdate datetime not null 
+        mdate datetime not null,
+        constraint check_type check (sender_type='P' or sender_type='S')`
     );
 END |
 

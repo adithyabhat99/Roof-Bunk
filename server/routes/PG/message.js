@@ -56,7 +56,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
     app.get("/api/pg/messages",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select distinct UID,Name from messages inner join Student on messages.sender_id=Student.UID and reciever_id='${pgid}' limit ${num},20`;
+        let query=`select distinct UID,Name from (select sender_id from messages where reciever_id='${pgid}' order by mdate desc) A inner join Student on sender_id=UID`;
         db.query(query,(error,result)=>{
             if(error)
             {

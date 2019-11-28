@@ -16,7 +16,7 @@ let basicHeader = {
     "Content-Type": "application/json",
     "x-access-token": token
 };
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
     let Type=(type=="student")?"pg":"student";
     fetch(`http://localhost:6900/api/name?type=${Type}&id=${sid}`)
     .then(res=>res.json())
@@ -246,6 +246,7 @@ function fetch_all() {
                 }
                 parent.appendChild(document.createElement("br"));
             }
+            parent.scrollTop=parent.scrollHeight;
         });
 }
 function fetch_image()

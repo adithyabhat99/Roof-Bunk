@@ -57,7 +57,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
     app.get("/api/student/messages",auth,(req,res)=>{
         let uid=req.decoded["uid"];
         let num=(req.body.num!=null)?req.body.num*10:0;
-        let query=`select distinct PGID,Owner_name from messages inner join Owner on messages.sender_id=Owner.PGID and reciever_id='${uid}' limit ${num},20`;
+        let query=`select distinct PGID,Pg_name from (select sender_id from messages where reciever_id='${uid}' order by mdate desc) A inner join Owner on sender_id=PGID`;
         db.query(query,(error,result)=>{
             if(error)
             {

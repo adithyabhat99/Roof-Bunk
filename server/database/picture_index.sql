@@ -1,1 +1,1 @@
-create unique index pictures_index on PG_Pictures(photo);
+create index name_index on Owner(Pg_name);
