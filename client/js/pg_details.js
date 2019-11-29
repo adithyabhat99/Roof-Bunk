@@ -4,8 +4,11 @@ const U=new URL(location.href);
 const PGID=U.searchParams.get("pgid");
 let dis=U.searchParams.get("distance");
 let Rating=3;
-if(!dis)
-    dis=10;
+if(dis=='null')
+    {
+        dis=1;
+        console.log(dis)
+    }
 if(!PGID)
 {
     location.href="../an-ad-deek/index.html";
@@ -61,7 +64,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     }); 
     document.querySelector(".chat").addEventListener("click",event=>{
         event.preventDefault();
-        location.href=`../messaging/index.html?type=student&sid=${PGID}`;
+        location.href=`../messaging/index.html?type1=student&sid=${PGID}`;
     }); 
     document.querySelector(".Stars").addEventListener("click",event=>{
         let c=event.target.className;
@@ -376,11 +379,11 @@ function loadRooms()
             let rr=document.createElement("div");
             rr.className="rooms-row";
             let h4=document.createElement("h4");
-            h4.className="type";
-            h4.innerText=d[i]["Type"];
+            h4.className="type1";
+            h4.innerText=d[i]["Type1"];
             let p1=document.createElement("p");
-            p1.className="empty";
-            p1.innerText=d[i]["Empty"];
+            p1.className="empty1";
+            p1.innerText=d[i]["Empty1"];
             let p2=document.createElement("p");
             p2.className="price";
             p2.innerText=d[i]["Price"];

@@ -208,6 +208,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
     });
     app.get("/api/pg/account",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
+        console.log(pgid)
         query=`select Pg_name,Owner_name,Contact,Email,Description,lat,lng,Gender,Bathroom,Wifi,AC,Meals,Laundry,Maid,students_preffered,avg(rating) as avg_rating from Owner inner join reviews on Owner.PGID=reviews.PGID and Owner.PGID='${pgid}'`;
         db.query(query,(error,result)=>{
             if(error)
@@ -216,6 +217,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 res.json({"error":"an error occered"});
                 return;
             }
+            console.log(result)
             res.statusCode=200;
             res.json({"details":result[0]});
         });

@@ -18,6 +18,7 @@ module.exports=(app,db,auth)=>{
                 res.statusCode=400;
                 res.json({"error":"error eccured"});
             }
+            console.log(result)
             res.statusCode=200;
             res.json(result[0]); 
         });

@@ -11,7 +11,7 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
             res.json({"error":"uid and message required"});
             return;
         }
-        query=`insert into messages(sender_type,sender_id,reciever_id,mdate,message) values('P','${pgid}','${uid}','${now}','${message}')`;
+        query=`insert into messages(sender_type1,sender_id,reciever_id,mdate,message) values('P','${pgid}','${uid}','${now}','${message}')`;
         db.query(query,(error,result)=>{
             if(error)
             {

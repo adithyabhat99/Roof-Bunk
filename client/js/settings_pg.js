@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
     document.querySelector(".add-room").addEventListener("click",event=>{
         event.preventDefault();
-        let type=document.querySelector(".n-type").value;
-        let empty=document.querySelector(".n-empty").value;
+        let type1=document.querySelector(".n-type").value;
+        let empty1=document.querySelector(".n-empty").value;
         let price=document.querySelector(".n-price").value;
         fetch(host+"/api/pg/rooms",{
             method:"POST",
             headers:basicHeader,
-            body:JSON.stringify({type,empty,price})
+            body:JSON.stringify({type1,empty1,price})
         })
         .then(r=>r.json())
         .then(d=>{
@@ -93,21 +93,21 @@ document.addEventListener("DOMContentLoaded",()=>{
             rr.className="rooms-row";
             let h4=document.createElement("h4");
             h4.className="type";
-            h4.innerText=type
+            h4.innerText=type1
             let empty=document.createElement("input");
             empty.className="empty";
-            empty.type="text";
-            empty.placeholder=empty
-            let price=document.createElement("input");
-            price.className="price";
-            price.type="text";
-            price.placeholder=price
+            empty.type1="text";
+            empty.placeholder=empty1
+            let price1=document.createElement("input");
+            price1.className="price";
+            price1.type1="text";
+            price1.placeholder=price;
             let button=document.createElement("button");
             button.className="change-room";
             button.innerText="Change";
             rr.appendChild(h4);
             rr.appendChild(empty);
-            rr.appendChild(price);
+            rr.appendChild(price1);
             rr.appendChild(button);
             parent.insertBefore(rr,parent.secondChild);
         });
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             fetch(host+"/api/pg/rooms",{
                 method:"PUT",
                 headers:basicHeader,
-                body:JSON.stringify({"type":t,"empty":e,"price":pr})
+                body:JSON.stringify({"type1":t,"empty1":e,"price":pr})
             })
             .then(r=>r.json())
             .then(d=>{
@@ -310,21 +310,21 @@ function fetch_rooms()
             let rr=document.createElement("div");
             rr.className="rooms-row";
             let h4=document.createElement("h4");
-            h4.className="type";
-            h4.innerText=d[i]["Type"];
-            let empty=document.createElement("input");
-            empty.className="empty";
-            empty.type="text";
-            empty.placeholder=d[i]["Empty"];
+            h4.className="type1";
+            h4.innerText=d[i]["Type1"];
+            let empty1=document.createElement("input");
+            empty1.className="empty1";
+            empty1.type1="text";
+            empty1.placeholder=d[i]["Empty1"];
             let price=document.createElement("input");
             price.className="price";
-            price.type="text";
+            price.type1="text";
             price.placeholder=d[i]["Price"];
             let button=document.createElement("button");
             button.className="change-room";
             button.innerText="Change";
             rr.appendChild(h4);
-            rr.appendChild(empty);
+            rr.appendChild(empty1);
             rr.appendChild(price);
             rr.appendChild(button);
             parent.insertBefore(rr,parent.secondChild);

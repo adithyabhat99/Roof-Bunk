@@ -22,7 +22,6 @@ module.exports=(app,db,email,sms,auth,datetime)=>{
                 return;
             }
             res.statusCode=200;
-            console.log(1)
             res.json({"message":"success"});
         });
         let query2=`select Email,Contact from Owner where PGID='${pgid}'`;

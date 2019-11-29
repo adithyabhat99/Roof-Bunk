@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                 let li=document.createElement("li");
                 let a=document.createElement("a");
                 a.className="mes";
-                a.innerText=data[i]["Owner_name"];
+                a.innerText=data[i]["Pg_name"];
                 a.setAttribute("pgid",data[i]["PGID"]);
                 li.appendChild(a);
                 parent.appendChild(li);
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         if(event.target.className=="mes")
         {
             let pgid=event.target.getAttribute("pgid");
-            location.href=`../messaging/index.html?type=student&sid=${pgid}`;
+            location.href=`../messaging/index.html?type1=student&sid=${pgid}`;
         }
     });
     document.querySelector(".tparent").addEventListener("click",event=>{

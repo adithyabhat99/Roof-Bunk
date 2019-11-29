@@ -2,7 +2,7 @@ module.exports=(app,db,email,sms,auth)=>{
     app.get("/api/pg/notifications",auth,(req,res)=>{
         let num=(req.body.num!=null)?req.body.num*10:0;
         let pgid=req.decoded["uid"];
-        let query=`select id,type,message,ndate,read_status from pg_notifications where PGID='${pgid}' and read_status=0 order by ndate desc limit ${num},10`;
+        let query=`select id,type1,message,ndate,read_status from pg_notifications where PGID='${pgid}' and read_status=0 order by ndate desc limit ${num},10`;
         db.query(query,(error,result)=>{
             if(error)
             {

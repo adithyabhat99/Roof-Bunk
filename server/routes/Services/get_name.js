@@ -1,14 +1,14 @@
 module.exports=(app,db)=>{
     app.get("/api/name",(req,res)=>{
-        let type=req.query.type;
+        let type1=req.query.type1;
         let id=req.query.id;
-        if(!type || !id)
+        if(!type1 || !id)
         {
             res.statusCode=400;
-            res.json({"error":"send type and id"});
+            res.json({"error":"send type1 and id"});
             return;
         }
-        if(type=="pg")
+        if(type1=="pg")
         {
             db.query(`select Pg_name from Owner where PGID='${id}'`,(error,result)=>{
                 if(error)

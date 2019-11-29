@@ -13,7 +13,7 @@
 .dash{
     display: grid;
     grid-template-columns: 0.9fr 1fr;
-    height: 590px;
+    height: 900px;
     margin-top: 0px;
 }
 .pics{

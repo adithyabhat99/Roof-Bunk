@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         if(t.className=="username")
         {
             let id=t.getAttribute("uid");
-            location.href=`../messaging/index.html?type=pg&sid=${id}`;
+            location.href=`../messaging/index.html?type1=pg&sid=${id}`;
         }
     });
 

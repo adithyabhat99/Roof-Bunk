@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded",()=>{
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
             if(data.hasOwnProperty("error"))
             {
                 alert(data["error"]);
@@ -92,7 +91,6 @@ document.addEventListener("DOMContentLoaded",()=>{
                     return;
                 }
                 window.localStorage.setItem("student_token",d["token"]);
-                window.localStorage.setItem("uid",d["uid"]);
                 location.href="../an-ad-deek/index.html";
             })
         })

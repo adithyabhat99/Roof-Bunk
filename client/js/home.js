@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         {
             let pgid=t.parentNode.getAttribute("pgid");
             let dis=t.parentNode.getAttribute("distance");
+            if(!dis)
+                dis=0;
             location.href=`../pg/pg_details.html?pgid=${pgid}&distance=${dis}`;
         }
     });

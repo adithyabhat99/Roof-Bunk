@@ -68,7 +68,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 // sms("+91"+number,`Welcome to Roof and Bunk,Please verify your number\n OTP: ${OTP}`);
             }
             res.statusCode=200;
-            res.json({"message":"success","uid":uid.toString(),"type":"student"});
+            res.json({"message":"success","uid":uid.toString(),"type1":"student"});
         });
     });
     app.delete("/api/student/account",auth,(req,res)=>{
@@ -145,7 +145,7 @@ module.exports=(app,db,email,sms,auth,fs,path)=>{
                 return;
             }
             res.statusCode=200;
-            res.json({"message":"success","uid":uid.toString(),"type":"student"});
+            res.json({"message":"success","uid":uid.toString(),"type1":"student"});
         });
     });
     app.get("/api/student/account",auth,(req,res)=>{

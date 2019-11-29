@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         if(event.target.className=="mes")
         {
             let uid=event.target.getAttribute("uid");
-            location.href=`../messaging/index.html?type=pg&sid=${uid}`;
+            location.href=`../messaging/index.html?type1=pg&sid=${uid}`;
         }
     });
 });

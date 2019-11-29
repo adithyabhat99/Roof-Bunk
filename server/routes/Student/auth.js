@@ -48,7 +48,7 @@ module.exports=(app,db,email,sms)=>{
                     const token=jwt.sign({
                         exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                         uid:UID,
-                        type:"student"
+                        type1:"student"
                     },auth_config["secret"]);
                     res.statusCode=200;
                     res.json({"message":"success","token":token,uid:UID.toString()});
@@ -87,7 +87,7 @@ module.exports=(app,db,email,sms)=>{
                 const token=jwt.sign({
                     exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                     uid:UID,
-                    type:"student"
+                    type1:"student"
                 },auth_config["secret"]);
                 res.statusCode=200;
                 res.json({"message":"success","token":token});
@@ -120,7 +120,7 @@ module.exports=(app,db,email,sms)=>{
                 const token=jwt.sign({
                     exp:Math.floor(Date.now()/1000)+(31*7*24*60*60),
                     uid:UID,
-                    type:"student"
+                    type1:"student"
                 },auth_config["secret"]);
                 res.statusCode=200;
                 res.json({"message":"success","token":token});

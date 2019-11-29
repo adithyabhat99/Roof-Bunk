@@ -45,15 +45,15 @@ BEGIN
         students_preffered tinyint(1) default 1, #Enter 1 if you prefer students else 0
         constraint check_pg_gender check (Gender='M' or Gender='F' or Gender='O')
     );
-    #table containing the description of the rooms(There can be different types of rooms in a PG)
+    #table containing the description of the rooms(There can be different type1s of rooms in a PG)
     create table if not exists Room
     (
         PGID varchar(128),
         foreign key(PGID) references Owner(PGID) on delete cascade,
-        Empty int(3), #gives total number of beds vacant
-        Type int(1), #Enter 1 for single sharing,2 for two sharing and so on
-        Price int(5),#gives price per month
-        CONSTRAINT ID_TYPE primary key(PGID,Type)
+        Empty1 int(3), 
+        Type1 int(1), 
+        Price int(5),
+        CONSTRAINT ID_TYPE1 primary key(PGID,Type1)
     );
     create table if not exists PG_Pictures 
     (
@@ -74,31 +74,33 @@ BEGIN
     );
     create table if not exists pg_notifications 
     ( 
+        id int primary key auto_increment,
         PGID varchar(128),  
         foreign key(PGID) references Owner(PGID) on delete cascade,  
         ndate datetime not null, 
-        type varchar(10) not null,
+        type1 varchar(10) not null,
         message text not null,
         read_status tinyint(1) default 0
     );
     create table if not exists student_notifications 
     ( 
+        id int primary key auto_increment,
         UID varchar(128),  
         foreign key(UID) references Student(UID) on delete cascade,  
         ndate datetime not null, 
-        type varchar(10) not null,
+        type1 varchar(10) not null,
         message text not null,
         read_status tinyint(1) default 0
     );
     create table if not exists messages 
     ( 
         id int primary key auto_increment,
-        sender_type char(1) not null, # 'P' for pg and 'S' for student
+        sender_type1 char(1) not null, # 'P' for pg and 'S' for student
         sender_id varchar(128) not null, 
         reciever_id varchar(128) not null, 
         message varchar(255) not null,
         mdate datetime not null,
-        constraint check_type check (sender_type='P' or sender_type='S')`
+        constraint check_type1 check (sender_type1='P' or sender_type1='S')
     );
 END |
 

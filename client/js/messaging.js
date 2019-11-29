@@ -1,12 +1,12 @@
 let url = new URL(location.href);
-let type = url.searchParams.get("type");
+let type1 = url.searchParams.get("type1");
 let sid = url.searchParams.get("sid");
 let token;
 let host = "http://localhost:6900";
-if (type == "student") {
+if (type1 == "student") {
     token = window.localStorage.getItem("student_token");
     host += "/api/student";
-} else if (type == "pg") {
+} else if (type1 == "pg") {
     token = window.localStorage.getItem("pg_token");
     host += "/api/pg";
 } else {
@@ -17,8 +17,8 @@ let basicHeader = {
     "x-access-token": token
 };
 document.addEventListener("DOMContentLoaded", () => { 
-    let Type=(type=="student")?"pg":"student";
-    fetch(`http://localhost:6900/api/name?type=${Type}&id=${sid}`)
+    let Type1=(type1=="student")?"pg":"student";
+    fetch(`http://localhost:6900/api/name?type1=${Type1}&id=${sid}`)
     .then(res=>res.json())
     .then(d=>{
         if(d.hasOwnProperty("error"))
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     fetch_image();
     fetch_all();
-    if(type=="pg")
+    if(type1=="pg")
     {
         document.querySelector(".info").style.display="none";
     }
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             return;
         }
-        if(type!="student")
+        if(type1!="student")
         {
             fetch(host+"/message",{
                 method:"POST",
@@ -136,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".typedMessage").value="";
     });
     document.querySelector(".msg-page").addEventListener("dblclick",event=>{
-        console.log("1");
         let t=event.target;
         if(t.className=="m")
         {
@@ -251,7 +250,7 @@ function fetch_all() {
 }
 function fetch_image()
 {
-    if(type=="student")
+    if(type1=="student")
     {
         fetch(host+"/pg_picture_1",{
             method:"PUT",

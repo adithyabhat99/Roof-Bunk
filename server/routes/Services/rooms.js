@@ -7,7 +7,7 @@ module.exports=(app,db,auth)=>{
             res.json({"error":"pgid required"});
             return;
         }
-        let query=`select * from Room where PGID='${pgid}'`;
+        let query=`select PGID,Empty1,Type1,Price from Room where PGID='${pgid}'`;
         db.query(query,(error,result)=>{
             if(error)
             {

@@ -46,7 +46,7 @@ function auth(req,res,next){
           else 
           {
             req.decoded = decoded;
-            if(decoded["type"]!="student")
+            if(decoded["type1"]!="student")
             {
               res.statusCode=401;
               return res.json({
@@ -87,7 +87,7 @@ function auth_pg(req,res,next){
         else 
         {
           req.decoded = decoded;
-          if(decoded["type"]!="pg")
+          if(decoded["type1"]!="pg")
           {
             res.statusCode=401;
             return res.json({

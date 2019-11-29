@@ -1,16 +1,16 @@
 module.exports=(app,db,email,sms,auth)=>{
     app.post("/api/pg/rooms",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
-        let empty=req.body.empty;
-        let type=req.body.type;
+        let empty1=req.body.empty1;
+        let type1=req.body.type1;
         let price=req.body.price;
-        if(!empty || !type || !price)
+        if(!empty1 || !type1 || !price)
         {
             res.statusCode=400;
-            res.json({"error":"send type,empty,price of room"});
+            res.json({"error":"send type1,empty1,price of room"});
             return;
         }
-        let query=`insert into Room values('${pgid}','${empty}','${type}','${price}')`;
+        let query=`insert into Room values('${pgid}','${empty1}','${type1}','${price}')`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -24,20 +24,20 @@ module.exports=(app,db,email,sms,auth)=>{
     });
     app.put("/api/pg/rooms",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
-        let empty=req.body.empty;
-        let type=req.body.type;
+        let empty1=req.body.empty1;
+        let type1=req.body.type1;
         let price=req.body.price;
-        if(!empty && !type && !price)
+        if(!empty1 && !type1 && !price)
         {
             res.statusCode=400;
-            res.json({"error":"send type as well as atleast one of empty,price"});
+            res.json({"error":"send type1 as well as atleast one of empty1,price"});
             return;
         }
         let query=`update Room set `;
         let a=[]
-        if(empty)
+        if(empty1)
         {
-            a.push(`Empty='${empty}'`);
+            a.push(`Empty1='${empty1}'`);
         }
         if(price)
         {
@@ -48,7 +48,7 @@ module.exports=(app,db,email,sms,auth)=>{
         {
             query+=","+a[i];
         }
-        query+=` where PGID='${pgid}' and Type='${type}'`;
+        query+=` where PGID='${pgid}' and Type1='${type1}'`;
         db.query(query,(error,result)=>{
             if(error)
             {
@@ -63,14 +63,14 @@ module.exports=(app,db,email,sms,auth)=>{
     });
     app.delete("/api/pg/rooms",auth,(req,res)=>{
         let pgid=req.decoded["uid"];
-        let type=req.body.type;
-        if(!type)
+        let type1=req.body.type1;
+        if(!type1)
         {
             res.statusCode=400;
-            res.json({"error":"send type"});
+            res.json({"error":"send type1"});
             return;
         }
-        let query=`delete from Room where PGID='${pgid}' and type='${type}'`;
+        let query=`delete from Room where PGID='${pgid}' and Type1='${type1}'`;
         db.query(query,(error,result)=>{
             if(error)
             {
