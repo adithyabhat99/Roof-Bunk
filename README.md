@@ -3,6 +3,22 @@
 ## Website which helps students to find PGs around Mysore.
 ## Platform to PG owners to advertise their PG.
 
+### Students
+Students can sign up and look for PGs around their location. Also, they can filter the results to get what they want.
+Students can view details of a PG(like picture), chat with the owner, rate and review the PG etc.
+There is also a top rated section which shows top rated PGs.
+
+### PG Owners
+PG owners can sign up and upload pictures, upload details of rooms and facilities.
+They have a dashboard to view reviews written on the PG.
+Owners also can chat with the students.
+
+### Some other features
+All the email ids and phone numbers are verfied with OTPs.
+Only verfied students and PG owners can sign in.
+There is also a notification system notifying students about messages, notifiying PG owners about new reviews and messages.
+Notifications are also sent via email and SMS.
+
 ### Screenshots
 
 ![](/Screenshots/1.png)
