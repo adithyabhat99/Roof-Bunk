@@ -98,3 +98,9 @@ public
 .dynamodb/
 
 server/Pictures/*
+
+.DS_Store
+
+auth_config.json
+twilio_config.json
+email_config.json
