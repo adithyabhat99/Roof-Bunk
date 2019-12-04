@@ -1,23 +1,7 @@
 # Roof-Bunk
 
-### Install node,npm and git
+## Website which helps students to find PGs around Mysore.
+## Platform to PG owners to advertise their PG.
 
-## Then..
-```
-cd ~/Roof-Bunk/server
-```
+### Screenshots
 
-```
-npm install
-```
-
-### And you are done with dependencies!
-
-
-### To run the server in developer mode(whenever code is changed, server will be automatially start)
-``` npm dev run ```
-
-### To run the server in production.
-``` node app.js ```
-
-### To test the server use POSTMAN or CURL
