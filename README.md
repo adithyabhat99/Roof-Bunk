@@ -5,10 +5,9 @@
 
 ### Screenshots
 
+![](/Screenshots/1.png)
+![](/Screenshots/1.jpg)
 ### Student
-
-![](/Screenshots/1.png)
-![](/Screenshots/1.png)
 ![](/Screenshots/student/login.png)
 ![](/Screenshots/student/1.png)
 ![](/Screenshots/student/2.png)
