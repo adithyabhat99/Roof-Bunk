@@ -29,10 +29,10 @@ Notifications are also sent via email and SMS.
 ![](/Screenshots/student/2.png)
 ![](/Screenshots/student/3.png)
 ![](/Screenshots/student/4.png)
+![](/Screenshots/student/8.png)
 ![](/Screenshots/student/5.png)
 ![](/Screenshots/student/6.png)
 ![](/Screenshots/student/7.png)
-![](/Screenshots/student/8.png)
 
 ### PG Owner 
 ![](/Screenshots/owner/login.png)
