@@ -4,12 +4,12 @@
 ## Platform to PG owners to advertise their PG.
 
 ### Students
-Students can sign up and look for PGs around their location. Also, they can filter the results to get what they want.
+Students can sign up/login and look for PGs around their location. Also, they can filter the results to get what they want.
 Students can view details of a PG(like picture), chat with the owner, rate and review the PG etc.
 There is also a top rated section which shows top rated PGs.
 
 ### PG Owners
-PG owners can sign up and upload pictures, upload details of rooms and facilities.
+PG owners can sign up/login and upload/delete pictures, upload details of rooms and facilities.
 They have a dashboard to view reviews written on the PG.
 Owners also can chat with the students.
 
