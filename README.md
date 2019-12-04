@@ -3,6 +3,11 @@
 ## Website which helps students to find PGs around Mysore.
 ## Platform to PG owners to advertise their PG.
 
+Contributors: <br />
+[Anagha Ravishankar](https://github.com/anagharavishankar) <br />
+[Deeksha Janardhan](https://github.com/deekshajanardhan)
+              
+
 ### Students
 Students can sign up/login and look for PGs around their location. Also, they can filter the results to get what they want.
 Students can view details of a PG(like picture), chat with the owner, rate and review the PG etc.
