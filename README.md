@@ -1,6 +1,6 @@
 # Roof-Bunk
 
-## Website which helps students to find PGs around Mysore.
+## Website which helps students to find PGs around a location.
 ## Platform to PG owners to advertise their PG.
 
 Contributors: <br />
