@@ -20,7 +20,7 @@
   "homepage": "https://github.com/adithyabhat99/Roof-Bunk#readme",
   "dependencies": {
     "bcrypt": "^3.0.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
